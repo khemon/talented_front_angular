@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html 🆖>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!-- Stylesheets
+	============================================= -->
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="./assets/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="./assets/css/swiper.css" type="text/css" />
+  <link rel="stylesheet" href="./assets/css/dark.css" type="text/css" />
+  <link rel="stylesheet" href="./assets/css/font-icons.css" type="text/css" />
+  <link rel="stylesheet" href="./assets/css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="./assets/css/magnific-popup.css" type="text/css" />
+
+  <link rel="stylesheet" href="./assets/css/responsive.css" type="text/css" />
+  <!-- End of Stylesheets>
+
+  <title><%= htmlWebpackPlugin.options.title %></title>
+
+  <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
+
+  <% if (webpackConfig.htmlElements.headTags) { %>
+  <!-- Configured Head Tags  -->
+  <%= webpackConfig.htmlElements.headTags %>
+  <% } %>
+
+  <!-- base url -->
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+
+
+</head>
+
+<body class="stretched">
+
+  <app>
+    Loading...
+  </app>
+
+  <!-- External JavaScripts
+  ============================================= -->
+  <script type="text/javascript" src="./assets/js/jquery.js"></script>
+  <script type="text/javascript" src="./assets/js/plugins.js"></script>
+
+  <!-- Footer Scripts
+    ============================================= -->
+  <script type="text/javascript" src="./assets/js/functions.js"></script>
+
+  <!-- Google Analytics: change UA-71073175-1 to be your site's ID -->
+  <script>
+    (function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=r;A[l]=A[l]||function(){
+    (A[l].q=A[l].q||[]).push(arguments)},A[l].l=1*new Date();a=n.createElement(g),
+    r=n.getElementsByTagName(g)[0];a.async=1;a.src=u;r.parentNode.insertBefore(a,r)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-71073175-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+
+
+  <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+  <!-- Webpack Dev Server reload -->
+  <script src="/webpack-dev-server.js"></script>
+
+
+  <% } %>
+
+
+</body>
+</html>
