@@ -1,64 +1,9 @@
-<div class="section">
-  <div class="container clearfix">
+<h1>{{title}}</h1>
+<user-detail [user]="selectedUser"></user-detail>
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let user of users" [class.selected]="user==selectedUser" (click)="onSelect(user)">
+    <span class="badge"> {{user.id}}</span> {{user.name}}
+  </li>
+</ul>
 
-    <div class="row topmargin-sm">
-
-
-      <div class="heading-block center">
-        <h3>Meet Our Team</h3>
-      </div>
-
-      <div class="col-md-4  col-md-push-2 col-sm-6 bottommargin">
-
-        <div class="team">
-          <div class="team-image">
-            <img src="../../assets/images/team/Nairo.jpg" alt="Florian Minin">
-          </div>
-          <div class="team-desc team-desc-bg">
-            <div class="team-title"><h4>Florian Minin</h4><span>CTO & Co-Founder</span></div>
-            <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-              <i class="icon-facebook"></i>
-              <i class="icon-facebook"></i>
-            </a>
-            <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-              <i class="icon-twitter"></i>
-              <i class="icon-twitter"></i>
-            </a>
-            <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
-              <i class="icon-gplus"></i>
-              <i class="icon-gplus"></i>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="col-md-push-2 col-md-4 col-sm-6 bottommargin">
-
-        <div class="team">
-          <div class="team-image">
-            <img src="../../assets/images/team/KB.jpg" alt="John Doe">
-          </div>
-          <div class="team-desc team-desc-bg">
-            <div class="team-title"><h4>Khemon Beh</h4><span>CEO</span></div>
-            <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-              <i class="icon-facebook"></i>
-              <i class="icon-facebook"></i>
-            </a>
-            <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-              <i class="icon-twitter"></i>
-              <i class="icon-twitter"></i>
-            </a>
-            <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
-              <i class="icon-gplus"></i>
-              <i class="icon-gplus"></i>
-            </a>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-<pre>this.localState = {{ localState | json }}</pre>

@@ -20,6 +20,7 @@ import { NoContentComponent } from './no-content';
 import { TestabcComponent} from './testabc';
 import {RegisterComponent} from "./register";
 import {ProfileComponent} from "./profile";
+import {UserDetailComponent} from "./testabc/user-detail.component";
 //import { XLarge } from './home/x-large';
 
 // Application wide providers
@@ -45,6 +46,7 @@ type StoreType = {
     HomeComponent,
     NoContentComponent,
     TestabcComponent,
+    UserDetailComponent,
     RegisterComponent,
     ProfileComponent
     /*,
