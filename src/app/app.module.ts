@@ -16,11 +16,17 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
+import { ContactComponent } from './contact';
 import { NoContentComponent } from './no-content';
-import { TestabcComponent} from './testabc';
+import {LoginComponent} from "./login";
 import {RegisterComponent} from "./register";
 import {ProfileComponent} from "./profile";
-import {UserDetailComponent} from "./testabc/user-detail.component";
+import {TalentsComponent} from "./talents";
+/*import {TalentsComponent} from "./talents";
+import {UserDetailComponent} from "./tutorial/user-detail.component";
+import {DashboardComponent} from "./tutorial/dashboard.component";
+import {AppTutoComponent} from "./tutorial/apptuto.component";
+import {UsersComponent} from "./tutorial/users.component";*/
 //import { XLarge } from './home/x-large';
 
 // Application wide providers
@@ -42,13 +48,18 @@ type StoreType = {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    ContactComponent,
     AboutComponent,
     HomeComponent,
     NoContentComponent,
-    TestabcComponent,
-    UserDetailComponent,
-    RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    TalentsComponent,
+    /*AppTutoComponent,
+     DashboardComponent,
+     UsersComponent,
+     UserDetailComponent,*/
     /*,
     XLarge*/
   ],

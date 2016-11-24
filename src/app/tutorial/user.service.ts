@@ -16,4 +16,8 @@ export class UserService {
       setTimeout(resolve, 2000)) // delay 2 seconds
       .then(() => this.getUsers());
   }
+
+  getUser(id: number): Promise<User> {
+    return this.getUsers().then(users => users.find(user => user.id === id))
+  }
 }

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
 import {User} from './user';
-import { USERS } from './mock-users';
 import { UserService} from './user.service';
 
 import {UserDetailComponent} from './user-detail.component';
@@ -14,26 +13,28 @@ import {UserDetailComponent} from './user-detail.component';
 
 
 
-console.log('`Testabc` component loaded asynchronously');
+console.log('`Users` component loaded asynchronously');
 
 @Component({
-  selector: 'testabc',
-  styleUrls: ['./testabc.component.css'],
-  templateUrl: './testabc.component.html',
-  providers: [UserService]
+  moduleId: module.id,
+  selector: 'my-users',
+  styleUrls: ['./users.component.css'],
+  templateUrl: './users.component.html',
 })
 
-export class TestabcComponent implements OnInit{
+export class UsersComponent implements OnInit{
   localState: any;
-  title ='Un titre';
   users: User[];
   selectedUser: User;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   getUsers(): void {
-    //this.userService.getUsers().then(users => this.users = users);
-    this.userService.getUsersSlowly().then(users => this.users = users);
+    this.userService.getUsers().then(users => this.users = users);
+    //this.userService.getUsersSlowly().then(users => this.users = users);
   }
 
   onSelect(user: User): void{
@@ -41,6 +42,10 @@ export class TestabcComponent implements OnInit{
   }
   ngOnInit(): void{
     this.getUsers()
+  }
+
+  gotoDetail(): void {
+    this.router.navigate(['/detail', this.selectedUser.id]);
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {User} from '../model/user';
 /*
  * We're loading this component asynchronously
  * We are using some magic with es6-promise-loader that will wrap the module with a Promise
@@ -9,15 +10,24 @@ import { ActivatedRoute } from '@angular/router';
 console.log('`Register` component loaded asynchronously');
 
 @Component({
-  selector: 'about',
-  styles: [`
-  `],
+  moduleId: module.id,
+  selector: 'register',
+  styleUrls: ['./forms.css'],
   templateUrl: 'register.component.html'
 })
 export class RegisterComponent {
+  jobTypes = ['Cleaning', 'Delivery', 'Transport', 'Teach', 'Baby-Sitting']
+  model = new User(18, 'John Doe', 'johndoe', 'pwd', 'john.doe@gmail.com', this.jobTypes[0], '0478548945');
+  submitted = false
   localState: any;
   constructor(public route: ActivatedRoute) {
 
+  }
+  onSubmit() { this.submitted = true;}
+
+  // TODO: remove this when we're done
+  get diagnostic(){
+    return JSON.stringify(this.model)
   }
 
   ngOnInit() {
