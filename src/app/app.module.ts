@@ -1,7 +1,7 @@
 import  { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule  } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
@@ -10,6 +10,8 @@ import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularcla
  */
 import  { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
+//import { Ng2SelectModule } from 'ng2-material-select';
+
 // App is our top level component
 import  { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
@@ -22,6 +24,10 @@ import {LoginComponent} from "./login";
 import {RegisterComponent} from "./register";
 import {ProfileComponent} from "./profile";
 import {TalentsComponent} from "./talents";
+import {ListUsersComponent} from "./list-users";
+import { InMemoryWebApiModule} from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data/in-memory-data.service';
+
 /*import {TalentsComponent} from "./talents";
 import {UserDetailComponent} from "./tutorial/user-detail.component";
 import {DashboardComponent} from "./tutorial/dashboard.component";
@@ -48,6 +54,7 @@ type StoreType = {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
+    //Ng2SelectModule,
     LoginComponent,
     RegisterComponent,
     ContactComponent,
@@ -56,10 +63,13 @@ type StoreType = {
     NoContentComponent,
     ProfileComponent,
     TalentsComponent,
-    /*AppTutoComponent,
-     DashboardComponent,
-     UsersComponent,
-     UserDetailComponent,*/
+    ListUsersComponent,
+
+
+/*AppTutoComponent,
+ DashboardComponent,
+ UsersComponent,
+ UserDetailComponent,*/
     /*,
     XLarge*/
   ],
@@ -67,6 +77,8 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    JsonpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
     RouterModule.forRoot(ROUTES, { useHash: true })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

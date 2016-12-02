@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewChecked, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 import { ActivatedRoute } from '@angular/router';
 import {User} from '../model/user';
+import {UserService} from '../list-users/user.service';
 /*
  * We're loading this component asynchronously
  * We are using some magic with es6-promise-loader that will wrap the module with a Promise
@@ -13,21 +16,83 @@ console.log('`Register` component loaded asynchronously');
   moduleId: module.id,
   selector: 'register',
   styleUrls: ['./forms.css'],
-  templateUrl: 'register.component.html'
+  templateUrl: 'register.component.html',
+  providers: [UserService]
 })
 export class RegisterComponent {
   jobTypes = ['Cleaning', 'Delivery', 'Transport', 'Teach', 'Baby-Sitting']
-  model = new User(18, 'John Doe', 'johndoe', 'pwd', 'john.doe@gmail.com', this.jobTypes[0], '0478548945');
+  user = new User(18, '', '', '', '', '', '');
   submitted = false
   localState: any;
-  constructor(public route: ActivatedRoute) {
+  registerForm: NgForm;
+  @ViewChild('registerForm') currentForm: NgForm;
 
+
+  ngAfterViewChecked() {
+    this.formChanged();
   }
-  onSubmit() { this.submitted = true;}
+
+  formChanged() {
+    if (this.currentForm === this.registerForm) {
+      return;
+    }
+    this.registerForm = this.currentForm;
+    if (this.registerForm) {
+      this.registerForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    }
+  }
+
+  onValueChanged(data?: any) {
+    if (!this.registerForm) {
+      return;
+    }
+    const form = this.registerForm.form;
+
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'name': '',
+    'email': '',
+    'userName': ''
+  };
+
+  validationMessages = {
+    'name': {
+      'required': 'Name is required.',
+      'minlength': 'Name must be at least 4 characters long.',
+      'maxlength': 'Name cannot be more than 24 characters long.',
+      'forbiddenName': 'Someone named "Bob" cannot be a hero.'
+    },
+    'email': {
+      'required': 'Email is required.'
+    },
+    'userName': {
+      'required': 'Username is required.'
+    }
+  };
+
+  constructor(public route: ActivatedRoute, private userService: UserService) {
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    //this.addUser(this.user);
+  }
 
   // TODO: remove this when we're done
-  get diagnostic(){
-    return JSON.stringify(this.model)
+  get diagnostic() {
+    return JSON.stringify(this.user)
   }
 
   ngOnInit() {
@@ -37,27 +102,15 @@ export class RegisterComponent {
         // your resolved data from route
         this.localState = data.yourData;
       });
+    /*
+     addUser (user : User) {
+     this.userService.addUser(user)
+     .subscribe(
+     user  => this.users.push(user),
+     error =>  this.errorMessage = <any>error);
 
-    console.log('hello `Register` component');
-    // static data that is bundled
-    // var mockData = require('assets/mock-data/mock-data.json');
-    // console.log('mockData', mockData);
-    // if you're working with mock data you can also use http.get('assets/mock-data/mock-data.json')
-    this.asyncDataWithWebpack();
+     }*/
+
+
   }
-  asyncDataWithWebpack() {
-    // you can also async load mock data with 'es6-promise-loader'
-    // you would do this if you don't want the mock-data bundled
-    // remember that 'es6-promise-loader' is a promise
-    setTimeout(() => {
-
-      System.import('../../assets/mock-data/mock-data.json')
-        .then(json => {
-          console.log('async mockData', json);
-          this.localState = json;
-        });
-
-    });
-  }
-
 }

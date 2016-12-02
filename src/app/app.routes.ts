@@ -11,6 +11,7 @@ import {DashboardComponent} from './tutorial/dashboard.component';
 import {UsersComponent} from './tutorial/users.component';
 import {AppTutoComponent} from "./tutorial/apptuto.component";
 import {TalentsComponent} from "./talents/talents.component";
+import {ListUsersComponent} from "./list-users";
 
 
 
@@ -23,6 +24,7 @@ export const ROUTES: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'talents', component: TalentsComponent},
+  { path: 'list-users', component: ListUsersComponent},
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent},
   /*{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
