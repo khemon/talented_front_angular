@@ -9,10 +9,10 @@ import {User} from '../model/user';
 console.log('`Register` component loaded asynchronously');
 
 @Component({
-  selector: 'talents',
-  templateUrl: 'talents.component.html'
+  selector: 'talent',
+  templateUrl: 'talent.component.html'
 
 })
-export class TalentsComponent {
+export class TalentComponent {
   constructor(public route: ActivatedRoute){}
 }

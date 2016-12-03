@@ -1,5 +1,6 @@
 KB note: 
-Add this dependancy : npm install ng2-material-select --save
+Add this dependancy : 
+- ng2-select https://github.com/valor-software/ng2-select
 
 
 

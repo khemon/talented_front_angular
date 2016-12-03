@@ -3,20 +3,29 @@
 
     <div class="swiper-container swiper-parent">
       <div class="swiper-wrapper">
-        <div class="swiper-slide dark" style="background-image: url('../../assets/images/slider/rev/ken-2.jpg');">
+        <div class="swiper-slide " style="background-image: url('../../assets/images/slider/rev/ken-2.jpg');">
           <div class="container clearfix">
             <div class="slider-caption slider-caption-center col-md-">
               <h2 data-caption-animate="fadeInUp" class="talented_title">Talented</h2>
               <p data-caption-animate="fadeInUp" data-caption-delay="200" class="talented_title">The App that gives your
                 time back and makes your life simply easier</p>
-              <form action="#" method="get" role="form" class="divcenter nobottommargin">
+              <!--<form action="#" method="get" role="form" class="divcenter nobottommargin">
                 <div class="input-group input-group-lg">
                   <input type="text" class="form-control" placeholder="Search a service">
                   <span class="input-group-btn">
-								<button class="btn btn-danger" type="button">Search</button>
-							</span>
+								    <button class="btn btn-danger" type="button">Search</button>
+							    </span>
                 </div>
-              </form>
+              </form>-->
+              <ng-select [allowClear]="true"
+                         [items]="items"
+                         [disabled]="disabled"
+                         (data)="refreshValue($event)"
+                         (selected)="selected($event)"
+                         (removed)="removed($event)"
+                         (typed)="typed($event)"
+                         placeholder="What do you need help with ?">
+              </ng-select>
             </div>
           </div>
         </div>
@@ -52,7 +61,42 @@
 
   </div>
 </section>
-<section id="content">
+<section>
+<div id="content">
+
+  <div class="container clearfix">
+
+  <div class="content-wrap col-md-push-1">
+
+
+  <div class="col_one_fourth nobottommargin">
+    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
+      <div class="fbox-icon">
+        <a href="#"><i class="i-alt noborder icon-wallet"></i></a>
+      </div>
+      <h3>Easy Payment Options<span class="subtitle">Credit Cards &amp; PayPal Support</span></h3>
+    </div>
+  </div>
+
+  <div class="col_one_fourth nobottommargin">
+    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
+      <div class="fbox-icon">
+        <a href="#"><i class="i-alt noborder icon-megaphone"></i></a>
+      </div>
+      <h3>Instant Notifications<span class="subtitle">Realtime Email &amp; SMS Support</span></h3>
+    </div>
+  </div>
+
+  <div class="col_one_fourth nobottommargin col_last">
+    <div class="feature-box fbox-center fbox-light fbox-effect nobottomborder">
+      <div class="fbox-icon">
+        <a href="#"><i class="i-alt noborder icon-fire"></i></a>
+      </div>
+      <h3>Hot Offers Daily<span class="subtitle">Upto 50% Discounts</span></h3>
+    </div>
+  </div>
+    </div>
+  <div class="clear"></div><div class="line bottommargin-lg"></div>
   <div class="container clearfix">
 
     <div class="col_one_third bottommargin-sm center">
@@ -77,6 +121,45 @@
 
     </div>
 
+  </div>
+    <div class="content-wrap">
+      <div class="col_one_third nobottommargin">
+        <div class="feature-box media-box">
+          <div class="fbox-media">
+            <img src="../../assets/images/services/1.jpg" alt="Why choose Us?">
+          </div>
+          <div class="fbox-desc">
+            <h3>Why choose Us.<span class="subtitle">Because we are Reliable.</span></h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi rem, facilis nobis voluptatum est voluptatem accusamus molestiae eaque perspiciatis mollitia.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col_one_third nobottommargin">
+        <div class="feature-box media-box">
+          <div class="fbox-media">
+            <img src="../../assets/images/services/2.jpg" alt="Why choose Us?">
+          </div>
+          <div class="fbox-desc">
+            <h3>Our Mission.<span class="subtitle">To Redefine your Brand.</span></h3>
+            <p>Quos, non, esse eligendi ab accusantium voluptatem. Maxime eligendi beatae, atque tempora ullam. Vitae delectus quia, consequuntur rerum molestias quo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col_one_third nobottommargin col_last">
+        <div class="feature-box media-box">
+          <div class="fbox-media">
+            <img src="../../assets/images/services/3.jpg" alt="Why choose Us?">
+          </div>
+          <div class="fbox-desc">
+            <h3>What we Do.<span class="subtitle">Make our Customers Happy.</span></h3>
+            <p>Porro repellat vero sapiente amet vitae quibusdam necessitatibus consectetur, labore totam. Accusamus perspiciatis asperiores labore esse ab accusantium ea modi ut.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <div class="section parallax dark nobottommargin"
@@ -199,5 +282,6 @@
 
       </div>
     </div>
+  </div>
   </div>
 </section>

@@ -76,6 +76,7 @@
     "http-server": "^0.9.0",
     "ie-shim": "^0.1.0",
     "ng2-material-select": "^0.1.4",
+    "ng2-select": "^1.1.2",
     "rxjs": "^5.0.0-rc.1",
     "zone.js": "~0.6.17"
   },

@@ -3082,7 +3082,7 @@ body:not(.stretched) .slider-parallax .slider-parallax-inner { left: auto; }
   left: 0;
   right: 0;
   /*KB ajout*/
-  margin-top:70px;
+  margin-top:85px;
 }
 
 .slider-caption-bg {
@@ -13543,4 +13543,3 @@ body:not(.no-transition) #wrapper,
   margin:0!important;
   padding:0!important
 }
-
