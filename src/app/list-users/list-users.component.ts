@@ -3,8 +3,7 @@
  */
 import {Router} from '@angular/router';
 import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {User} from '../tutorial/user';
+import {User} from '../model/user';
 import {UserService} from "./user.service";
 
 console.log('`list-users` component loaded asynchronously');

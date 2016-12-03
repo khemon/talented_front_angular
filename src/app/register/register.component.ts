@@ -1,7 +1,6 @@
 import { Component, AfterViewChecked, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { ActivatedRoute } from '@angular/router';
 import {User} from '../model/user';
 import {UserService} from '../list-users/user.service';
 /*
@@ -14,9 +13,9 @@ console.log('`Register` component loaded asynchronously');
 
 @Component({
   moduleId: module.id,
-  selector: 'register',
+  selector: 'register-user',
   styleUrls: ['./forms.css'],
-  templateUrl: 'register.component.html',
+  templateUrl: './register.component.html',
   providers: [UserService]
 })
 export class RegisterComponent {
@@ -82,7 +81,7 @@ export class RegisterComponent {
     }
   };
 
-  constructor(public route: ActivatedRoute, private userService: UserService) {
+  constructor() {
   }
 
   onSubmit() {
@@ -90,18 +89,7 @@ export class RegisterComponent {
     //this.addUser(this.user);
   }
 
-  // TODO: remove this when we're done
-  get diagnostic() {
-    return JSON.stringify(this.user)
-  }
 
-  ngOnInit() {
-    this.route
-      .data
-      .subscribe((data: any) => {
-        // your resolved data from route
-        this.localState = data.yourData;
-      });
     /*
      addUser (user : User) {
      this.userService.addUser(user)

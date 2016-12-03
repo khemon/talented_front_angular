@@ -13,12 +13,12 @@ import {ListUsersComponent} from "./list-users";
 export const ROUTES: Routes = [
   { path: '',      component: HomeComponent },
   { path: 'home',  component: HomeComponent },
+  { path: 'login', component: LoginComponent},
   { path: 'about', component: AboutComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register-user', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'list-users', component: ListUsersComponent},
   { path: 'contact', component: ContactComponent },
-  { path: 'login', component: LoginComponent},
   { path: 'talent', component: TalentComponent},
   { path: '**',    component: NoContentComponent },
 ];
