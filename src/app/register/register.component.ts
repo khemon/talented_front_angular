@@ -21,11 +21,14 @@ console.log('`Register` component loaded asynchronously');
 export class RegisterComponent {
   jobTypes = ['Cleaning', 'Delivery', 'Transport', 'Teach', 'Baby-Sitting']
   user = new User(18, '', '', '', '', '', '');
+  users: User[];
+  errorMessage: any;
   submitted = false
   localState: any;
   registerForm: NgForm;
   @ViewChild('registerForm') currentForm: NgForm;
 
+  constructor(private userService: UserService){}
 
   ngAfterViewChecked() {
     this.formChanged();
@@ -86,19 +89,25 @@ export class RegisterComponent {
 
   onSubmit() {
     this.submitted = true;
-    //this.addUser(this.user);
+    this.addUser(this.user);
   }
 
-
-    /*
-     addUser (user : User) {
-     this.userService.addUser(user)
+  addUser (user : User) {
+    this.getUsers();
+    this.userService.addUser(user)
      .subscribe(
      user  => this.users.push(user),
      error =>  this.errorMessage = <any>error);
-
-     }*/
-
+    alert(this.users.toString());
+  }
+  getUsers(): void {
+    this.userService.getUsers()
+      .subscribe(
+        users => this.users = users,
+        error => this.errorMessage = <any>error);
 
   }
+
+
+
 }

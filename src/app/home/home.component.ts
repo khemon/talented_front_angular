@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {Router} from '@angular/router';
 import { AppState } from '../app.service';
 
 @Component({
@@ -16,14 +16,14 @@ export class HomeComponent {
   // Set our default values
   localState = {value: ''};
   // TypeScript public modifiers
-  public items: Array<string> = ['Cleaning', 'Delivery', 'Transport', 'Cooking',
-  'Moving'];
+  public items: Array<string> = ['Ménage', 'Déménagement', "Bricolage", 'Livraison', "Cours/Coaching",'Transport de colis', 'Cuisine'];
 
   private value: any = {};
   private _disabledV: string = '0';
   private disabled: boolean = false;
 
-  constructor(public appState: AppState) {
+  constructor(public appState: AppState,
+              private router: Router) {
 
   }
 
@@ -42,8 +42,10 @@ export class HomeComponent {
     this.disabled = this._disabledV === '1';
   }
 
-  public selected(value: any): void {
-    console.log('Selected value is: ', value);
+  public selected(jobType: any): void {
+    console.log('Selected value is: ', jobType);
+    this.router.navigate(['/create-job', jobType]);
+
   }
 
   public removed(value: any): void {

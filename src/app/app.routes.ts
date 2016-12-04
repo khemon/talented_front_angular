@@ -6,8 +6,9 @@ import {LoginComponent} from "./login";
 import {RegisterComponent} from './register';
 import {ContactComponent} from "./contact/";
 import {ProfileComponent} from './profile';
-=import {TalentComponent} from "./talent/talent.component";
+import {TalentComponent} from "./talent/talent.component";
 import {ListUsersComponent} from "./list-users";
+import {CreateJobComponent} from "./create-job";
 
 
 export const ROUTES: Routes = [
@@ -20,5 +21,6 @@ export const ROUTES: Routes = [
   { path: 'list-users', component: ListUsersComponent},
   { path: 'contact', component: ContactComponent },
   { path: 'talent', component: TalentComponent},
+  { path: 'create-job', component: CreateJobComponent},
   { path: '**',    component: NoContentComponent },
 ];

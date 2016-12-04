@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from "@angular/http";
-import {User} from '../tutorial/user';
+import {User} from '../model/user';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/Rx';
 
@@ -11,12 +11,13 @@ import 'rxjs/Rx';
 @Injectable()
 export class UserService {
 
-  private usersUrl = 'app/users.json'; // URL to web api 'app/users'
+  private usersUrl = 'app/in-memory-data/users.json'; // URL to web api 'app/users'
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private  http: Http) {}
 
   getUsers(): Observable<User[]>{
+
     return this.http.get(this.usersUrl)
       .map(this.extractData)
       .catch(this.handleError);

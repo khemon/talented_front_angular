@@ -31,6 +31,8 @@ import {TalentComponent} from "./talent";
 import {ListUsersComponent} from "./list-users";
 import { InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data/in-memory-data.service';
+import {CreateJobComponent} from "./create-job";
+
 /*import {TalentsComponent} from "./talents";
 import {UsersComponent} from "./tutorial/users.component";*/
 //import { XLarge } from './home/x-large';
@@ -63,17 +65,19 @@ type StoreType = {
     NoContentComponent,
     ProfileComponent,
     TalentComponent,
-    ListUsersComponent
+    ListUsersComponent,
+    CreateJobComponent
 
-    /*,
-    XLarge*/
+
+/*,
+XLarge*/
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
     HttpModule,
     JsonpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    //InMemoryWebApiModule.forRoot(InMemoryDataService),
     RouterModule.forRoot(ROUTES, { useHash: true }),
     SelectModule
   ],

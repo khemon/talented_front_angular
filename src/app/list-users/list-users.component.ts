@@ -39,6 +39,16 @@ export class ListUsersComponent {
     this.selectedUser = user;
   }
 
+  addUser(user: User) {
+    if (!user) {
+      return;
+    }
+    this.userService.addUser(user)
+      .subscribe(
+        user => this.users.push(user),
+        error => this.errorMessage = <any>error);
+  }
+
   ngOnInit(): void {
     this.getUsers()
   }
