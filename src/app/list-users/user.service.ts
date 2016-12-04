@@ -11,7 +11,9 @@ import 'rxjs/Rx';
 @Injectable()
 export class UserService {
 
-  private usersUrl = 'app/in-memory-data/users.json'; // URL to web api 'app/users'
+  // Base URL for Talented API
+  private petsUrl = 'http://web
+  private usersUrl = 'users/getAllUsers' //'app/in-memory-data/users.json';  URL to web api 'app/users'
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private  http: Http) {}
