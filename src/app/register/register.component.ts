@@ -84,9 +84,6 @@ export class RegisterComponent {
     }
   };
 
-  constructor() {
-  }
-
   onSubmit() {
     this.submitted = true;
     this.addUser(this.user);
