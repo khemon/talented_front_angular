@@ -14,7 +14,7 @@ import {User} from '../model/user';
 console.log('`Login` component loaded asynchronously');
 
 @Component({
-  moduleId: module.id,
+  //moduleId: module.id,
   selector: 'login',
   templateUrl: 'login.component.html'
 })

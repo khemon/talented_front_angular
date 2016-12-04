@@ -13,7 +13,7 @@ console.log('`create-job` component loaded asynchronously');
 declare var google: any;
 
 @Component({
-  moduleId: module.id,
+  //moduleId: module.id,
   selector: 'create-job',
   templateUrl: './create-job.component.html',
   styleUrls: ['./create-job.component.css']

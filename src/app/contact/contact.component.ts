@@ -14,7 +14,7 @@ import {User} from '../model/user';
 console.log('`Contact` component loaded asynchronously');
 
 @Component({
-  moduleId: module.id,
+  //moduleId: module.id,
   selector: 'contact',
   templateUrl: 'contact.component.html'
 })

@@ -1,9 +1,3 @@
-KB note: 
-Add this dependancy : 
-- ng2-select https://github.com/valor-software/ng2-select
-
-
-
 <p align="center">
   <a href="http://courses.angularclass.com/courses/angular-2-fundamentals?utm_source=github-angular2-webpack-starter&utm_medium=open-source&utm_campaign=webpackstarter" target="_blank">
     <img width="438" alt="Angular 2 Fundamentals" src="https://cloud.githubusercontent.com/assets/1016365/17200649/085798c6-543c-11e6-8ad0-2484f0641624.png">
@@ -306,7 +300,7 @@ import * as _ from 'lodash';
 * How do I run protractor with node 0.12.x?
   * please check out this repo to use the old version of protractor [#146](https://github.com/AngularClass/angular2-webpack-starter/pull/146/files)
 * Where do I write my tests?
-  * You can write your tests next to your component files. See [`/src/app/home/home.spec.ts`](/src/app/home/home.spec.ts)
+  * You can write your tests next to your component files. See [`/src/app/home/home.component.spec.ts`](/src/app/home/home.component.spec.ts)
 * How do I start the app when I get `EACCES` and `EADDRINUSE` errors?
   * The `EADDRINUSE` error means the port `3000` is currently being used and `EACCES` is lack of permission for webpack to build files to `./dist/`
 * How to use `sass` for css?

@@ -12,7 +12,7 @@ import {UserService} from '../list-users/user.service';
 console.log('`Register` component loaded asynchronously');
 
 @Component({
-  moduleId: module.id,
+  //moduleId: module.id,
   selector: 'register-user',
   styleUrls: ['./forms.css'],
   templateUrl: './register.component.html',
