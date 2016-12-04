@@ -12,7 +12,7 @@ import 'rxjs/Rx';
 export class UserService {
 
   // Base URL for Talented API
-  private petsUrl = 'http://web
+  private petsUrl = 'http://web';
   private usersUrl = 'users/getAllUsers' //'app/in-memory-data/users.json';  URL to web api 'app/users'
   private headers = new Headers({'Content-Type': 'application/json'});
 
