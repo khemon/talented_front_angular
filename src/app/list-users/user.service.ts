@@ -13,7 +13,7 @@ export class UserService {
 
   // Base URL for Talented API
   private petsUrl = 'http://web';
-  private usersUrl = 'users/getAllUsers' //'app/in-memory-data/users.json';  URL to web api 'app/users'
+  private usersUrl = 'app/in-memory-data/users.json';   //'users/getAllUsers' URL to web api 'app/users'
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private  http: Http) {}
@@ -25,7 +25,7 @@ export class UserService {
       .catch(this.handleError);
   }
 /*
-  getUser(id: number): Observable<User> {
+  (id: numgetUserber): Observable<User> {
     return this.getUsers().
     subscribe(
       users => users.find(user => user.id === id)

@@ -3,11 +3,11 @@
 <section id="page-title">
 
   <div class="container clearfix">
-    <h1>Demande de service</h1>
-    <span>Deposer ma demande</span>
+    <h1>Service de {{jobType}}</h1>
+    <span>Deposer ma demande </span>
     <ol class="breadcrumb">
       <li><a href="#">Home</a></li>
-      <li class="active">Deposer ma demande</li>
+      <li class="active">Nouveau service</li>
     </ol>
   </div>
 
@@ -21,61 +21,85 @@
 
     <div class="container clearfix">
 
-      <div id="processTabs"> <!--[ngSwitch]="step">-->
+      <div id="processTabs" [ngSwitch]="step">
 
         <ul class="process-steps process-5 clearfix">
 
-          <li class="active">
-            <a href="#" class="i-bordered i-circled i-alt divcenter bgcolor icon-pencil2"
-               (click)="changeStep('inputStep')"></a>
+          <li [ngClass]="{'active': step==='inputStep'}">
+            <span href="#" class="i-bordered i-circled i-alt divcenter bgcolor icon-pencil2"
+                  (click)="changeStep('inputStep')"></span>
             <h5>Je saisis ma demande</h5>
           </li>
-          <li>
-            <a href="#" class="i-bordered i-circled divcenter icon-bullhorn" (click)="changeStep('notifyStep')"></a>
+          <li [ngClass]="{'active': step==='notifyStep'}">
+            <span href="#" class="i-bordered i-circled divcenter icon-bullhorn"
+                  (click)="changeStep('notifyStep')"></span>
             <h5>J'avertis les talents à proximité</h5>
           </li>
-          <li>
-            <a href="#" class="i-bordered i-circled i-alt divcenter bgcolor icon-like"
-               (click)="changeStep('selectTalentStep')"></a>
+          <li [ngClass]="{'active': step==='selectTalentStep'}">
+            <span href="#" class="i-bordered i-circled i-alt divcenter bgcolor icon-like"
+                  (click)="changeStep('selectTalentStep')"></span>
             <h5>Je choisi le meilleur talent</h5>
           </li>
-          <li>
-            <a href="#" class="i-bordered i-circled divcenter icon-money" (click)="changeStep('buyStep')"></a>
+          <li [ngClass]="{'active': step==='buyStep'}">
+            <span href="#" class="i-bordered i-circled divcenter icon-money" (click)="changeStep('buyStep')"></span>
             <h5>Je paie</h5>
           </li>
-          <li>
-            <a href="#" class="i-bordered i-circled divcenter icon-ok" (click)="changeStep('notifyStep')"></a>
+          <li [ngClass]="{'active': step==='doneStep'}">
+            <span href="#" class="i-bordered i-circled divcenter icon-ok" (click)="changeStep('doneStep')"></span>
             <h5>C'est fini !</h5>
           </li>
         </ul>
 
-        <div class="container clearfix" id="ptab1">
-
-          <h3>Où ?</h3>
-
-          <div class="col_one_third nobottommargin">
-            <div class="input-group input-group-lg">
-              <span class="input-group-addon"><i class="icon-map-marker"></i></span>
-              <input type="text" id="location-input" name="location-input" class="form-control"
-                     placeholder="Où est-ce que j'ai besoin d'aide ?">
-              <span class="input-group-btn">
+        <div class="container clearfix" id="ptab1" *ngSwitchCase="'inputStep'">
+          <div>
+            <h3>Où ?</h3>
+            <div class="col_one_third nobottommargin">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="icon-map-marker"></i></span>
+                <input type="text" id="location-input" name="location-input" class="form-control"
+                       placeholder="Où est-ce que j'ai besoin d'aide ?">
+                <span class="input-group-btn">
                   <button class="btn btn-default" id="location-submit" type="submit"><i
                     class="icon-line-search"></i></button>
                 </span>
+              </div>
+
+              <p id="location-coordinates" style="display: none; margin-top: 10px;">
+                <small id="latitude-text"><em>Latitude:</em></small> &middot;
+                <small id="longitude-text"><em>Longitude:</em></small>
+              </p>
             </div>
-
-            <p id="location-coordinates" style="display: none; margin-top: 10px;">
-              <small id="latitude-text"><em>Latitude:</em></small> &middot;
-              <small id="longitude-text"><em>Longitude:</em></small>
-            </p>
+            <div *ngIf="mapReady" id="map"></div>
           </div>
-
-          <div id="map"></div>
-
+          <div>
+            <h3>Quand ?</h3>
+            <form action="#" method="post" class="nobottommargin">
+              <div class="input-daterange travel-date-group bottommargin-sm">
+                <div class="row">
+                  <div class="col-sm-6 bottommargin-sm">
+                    <input type="date" value="" class="sm-form-control tleft today" placeholder="MM/DD/YYYY">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div>
+            <h3>Comment ?</h3>
+            <div class="col_full">
+              <label for="template-contactform-message">Detaillez brièvememnt ce dont vous avez besoin
+                <small>*</small>
+              </label>
+              <textarea class="required sm-form-control" id="template-contactform-message"
+                        name="template-contactform-message" rows="6" cols="30"></textarea>
+            </div>
+            <div class="line"></div>
+            <a (click)="changeStep('notifyStep')" class="button button-3d nomargin fright tab-linker" rel="3">Etape
+              Suivante</a>
+          </div>
 
         </div>
 
-        <div id="ptab2" *ngIf="test"> <!--*ngSwitchCase="'notifyStep'"-->
+        <div id="ptab2" *ngSwitchCase="'notifyStep'">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, deleniti, atque soluta ratione
             blanditiis maxime at architecto laudantium eius eaque distinctio dolorem voluptatem nam ab molestias velit
             nemo. Illo, hic.</p>
@@ -84,10 +108,13 @@
             non deserunt repellat eius rem dolorem corporis temporibus voluptatibus ut! Quod, corporis, tempora,
             dolore, sint earum minus deserunt eveniet natus error magnam aliquam nemo.</p>
           <div class="line"></div>
-          <a href="#" class="button button-3d nomargin tab-linker" rel="1">Previous</a>
-          <a href="#" class="button button-3d nomargin fright tab-linker" rel="3">Pay Now</a>
+          <a (click)="changeStep('inputStep')" class="button button-3d nomargin tab-linker" rel="1">Saisir ma
+            demande</a>
+          <a (click)="changeStep('selectTalentStep')" class="button button-3d nomargin fright tab-linker" rel="3">Choisir
+            le TalentWorker</a>
         </div>
-        <div id="ptab3"> <!--*ngSwitchCase="'selectTalentStep'" -->
+
+        <div id="ptab3" *ngSwitchCase="'selectTalentStep'">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, sit, culpa, placeat, tempora
             quibusdam molestiae cupiditate atque tempore nemo tenetur facere voluptates autem aliquid provident
             distinctio beatae odio maxime pariatur eos ratione quae itaque quod. Distinctio, temporibus, cupiditate,
@@ -95,12 +122,19 @@
             est in sunt et corrupti adipisci quibusdam praesentium optio laborum tempora ipsam aut cum consectetur
             veritatis dolorem.</p>
           <div class="line"></div>
-          <a href="#" class="button button-3d nomargin tab-linker" rel="2">Previous</a>
-          <a href="#" class="button button-3d nomargin fright tab-linker" rel="4">Complete Order</a>
+          <a (click)="changeStep('notifyStep')" class="button button-3d nomargin tab-linker" rel="2">Choisir le
+            TalentWorker</a>
+          <a (click)="changeStep('buyStep')" class="button button-3d nomargin fright tab-linker" rel="4">Payer le
+            service</a>
         </div>
-        <div id="ptab4"> <!--*ngSwitchCase="'buyStep'"> -->
+        <div id="ptab4" *ngSwitchCase="'buyStep'">
           <div class="alert alert-success">
-            <strong>Thank You.</strong> Your order will be processed once we verify the Payment.
+            <strong>Merci de votre confiance</strong> Votre talent va prendre contact avec vous.
+          </div>
+        </div>
+        <div id="ptab4" *ngSwitchCase="'doneStep'">
+          <div class="alert alert-success">
+            <strong>votre service est pris en charge.</strong>
           </div>
         </div>
       </div>

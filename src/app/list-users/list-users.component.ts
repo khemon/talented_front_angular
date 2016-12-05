@@ -11,7 +11,7 @@ console.log('`list-users` component loaded asynchronously');
 @Component({
   //moduleId: module.id,
   selector: 'list-users',
-  templateUrl: 'list-users.component.html',
+  templateUrl: './list-users.component.html',
   providers: [UserService]
 })
 

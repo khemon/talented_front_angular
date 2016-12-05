@@ -16,7 +16,7 @@ export class HomeComponent {
   // Set our default values
   localState = {value: ''};
   // TypeScript public modifiers
-  public items: Array<string> = ['Ménage', 'Déménagement', "Bricolage", 'Livraison', "Cours/Coaching",'Transport de colis', 'Cuisine'];
+  public items: Array<string> = ['Ménage', 'Déménagement', "Bricolage", 'Livraison', 'Baby-Sitting', "Cours/Coaching",'Transport de colis', 'Cuisine'];
 
   private value: any = {};
   private _disabledV: string = '0';

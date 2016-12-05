@@ -16,6 +16,7 @@ console.log('`Profile` component loaded asynchronously');
 })
 export class ProfileComponent {
   localState: any;
+  private tab: number = 1;
   constructor(public route: ActivatedRoute) {
 
   }
