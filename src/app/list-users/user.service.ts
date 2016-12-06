@@ -18,11 +18,31 @@ export class UserService {
     this.apiEndPoint = config.apiEndPoint;
   }
 
+  /**
+   * Retourne la liste des utilisateurs de la BDD
+   */
   getUsers(): Observable<User[]>{
     return this.http.get(this.apiEndPoint + this.userUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  /**
+   * Retourne la liste des utilisateurs disponibles
+   * aux alentours d'un job donné
+   * Signature : getUsersAvailableByJob(Job job);
+   */
+  //getUsersAvailableByJob() : Observable<User[]>{}
+
+
+  /**
+   * Notifie l'utilisateur donné avec le message passé en paramètre
+   * A réfléchir si on ajoute un type de message pour pouvoir créer des
+   * templates de messages a envoyer aux utilisateurs
+   * Signature : notifyUser(User user, String message)
+   * Signature 2 : notifyUser(User user, int typeMessage)
+   */
+   //notifyUser() : void {}
 
   addUser(user: User): Observable<User> {
     let userString = JSON.stringify(user);
