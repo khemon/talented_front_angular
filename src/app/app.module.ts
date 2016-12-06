@@ -36,6 +36,9 @@ import {CreateJobComponent} from "./create-job";
 /*import {TalentsComponent} from "./talents";
 import {UsersComponent} from "./tutorial/users.component";*/
 //import { XLarge } from './home/x-large';
+import { OpaqueToken } from "@angular/core";
+// Configuration accessible depuis tous les services
+import {APP_CONFIG, TALENTED_DI_CONFIG } from './app-config'
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -67,10 +70,7 @@ type StoreType = {
     TalentComponent,
     ListUsersComponent,
     CreateJobComponent
-
-
-/*,
-XLarge*/
+    /*,XLarge*/
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -83,9 +83,11 @@ XLarge*/
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    {provide: APP_CONFIG, useValue: TALENTED_DI_CONFIG}
   ]
 })
+
 export class AppModule {
   constructor(public appRef: ApplicationRef, public appState: AppState) {}
 
@@ -125,4 +127,3 @@ export class AppModule {
   }
 
 }
-
