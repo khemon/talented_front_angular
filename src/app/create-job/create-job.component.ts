@@ -27,7 +27,7 @@ export class CreateJobComponent {
   private lat: number = 48.866667;
   private lng: number = 2.333333;
   private zoom: number = 15;
-  private place: string;
+  private address: string;
 
   private subscription: Subscription;
   private markerService: marker = {
@@ -60,13 +60,6 @@ export class CreateJobComponent {
   constructor(private route: ActivatedRoute,  private __loader: MapsAPILoader,
   private __zone: NgZone){  }
 
-
-  relocate(address:string, lat:number, lng:number ){
-    this.lat = lat;
-    this.lng = lng;
-    this.place = address;
-    alert(this.place);
-  }
 
   /*
   getLocation(){
@@ -123,6 +116,7 @@ export class CreateJobComponent {
           if (place.geometry.location) {
             this.lat = place.geometry.location.lat();
             this.lng = place.geometry.location.lng();
+            this.address = place.formatted_address;
             this.markerService.lat = this.lat;
             this.markerService.lng = this.lng;
           }
