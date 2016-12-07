@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule  } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import {OffClickDirective} from 'ng2-select/components/select/off-click';
-import {HighlightPipe} from 'ng2-select/components/select/select-pipes';
+import { AgmCoreModule } from 'angular2-google-maps/core';
+
 
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
@@ -79,7 +79,11 @@ type StoreType = {
     JsonpModule,
     //InMemoryWebApiModule.forRoot(InMemoryDataService),
     RouterModule.forRoot(ROUTES, { useHash: true }),
-    SelectModule
+    SelectModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD5LiWnQoVNvjT7H1w2Omzyleyx8r-3b-Y',
+      libraries: ['places']
+    })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

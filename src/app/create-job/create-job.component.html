@@ -53,24 +53,39 @@
         <div class="container clearfix" id="ptab1" *ngSwitchCase="'inputStep'">
           <div>
             <h3>Où ?</h3>
-            <div class="col_one_third nobottommargin">
+            <div class="nobottommargin">
               <div class="input-group input-group-lg">
                 <span class="input-group-addon"><i class="icon-map-marker"></i></span>
                 <input type="text" id="location-input" name="location-input" class="form-control"
-                       placeholder="Où est-ce que j'ai besoin d'aide ?">
+                       id="autocompleteInput" [(ngModel)]="place"
+                       placeholder="Où est-ce que j'ai besoin d'un service de {{jobType}} ?">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" id="location-submit" type="submit"><i
+                  <button class="btn btn-default" id="location-submit" (click)="test()" type="submit"><i
                     class="icon-line-search"></i></button>
                 </span>
               </div>
 
-              <p id="location-coordinates" style="display: none; margin-top: 10px;">
-                <small id="latitude-text"><em>Latitude:</em></small> &middot;
-                <small id="longitude-text"><em>Longitude:</em></small>
-              </p>
             </div>
-            <div *ngIf="mapReady" id="map"></div>
+            <!--<div *ngIf="mapReady" id="map"></div>-->
+            <sebm-google-map [latitude]="lat"
+                             [longitude]="lng"
+                             [zoom]="zoom"
+                             [disableDefaultUI]="false"
+                             [zoomControl]="false"
+                             (mapClick)="mapClicked($event)">
+              <sebm-google-map-marker
+                (markerClick)="clickedMarker(markerService.label, i)"
+                [latitude]="markerService.lat"
+                [longitude]="markerService.lng"
+                [label]="markerService.label"
+                [markerDraggable]="markerService.draggable"
+              ></sebm-google-map-marker>
+              <sebm-google-map-info-window>
+                <strong>{{jobType}} à faire ici</strong>
+              </sebm-google-map-info-window>
+            </sebm-google-map>
           </div>
+          <div class="line"></div>
           <div>
             <h3>Quand ?</h3>
             <form action="#" method="post" class="nobottommargin">
@@ -83,6 +98,7 @@
               </div>
             </form>
           </div>
+          <div class="line"></div>
           <div>
             <h3>Comment ?</h3>
             <div class="col_full">
@@ -92,7 +108,7 @@
               <textarea class="required sm-form-control" id="template-contactform-message"
                         name="template-contactform-message" rows="6" cols="30"></textarea>
             </div>
-            <div class="line"></div>
+            <div class="divider divider-center"><i class="icon-circle"></i></div>
             <a (click)="changeStep('notifyStep')" class="button button-3d nomargin fright tab-linker" rel="3">Etape
               Suivante</a>
           </div>
@@ -108,6 +124,24 @@
             non deserunt repellat eius rem dolorem corporis temporibus voluptatibus ut! Quod, corporis, tempora,
             dolore, sint earum minus deserunt eveniet natus error magnam aliquam nemo.</p>
           <div class="line"></div>
+          <!--<div *ngIf="mapReady" id="map"></div>-->
+          <sebm-google-map [latitude]="lat"
+                           [longitude]="lng"
+                           [zoom]="zoom"
+                           [disableDefaultUI]="false"
+                           [zoomControl]="false"
+                           (mapClick)="mapClicked($event)">
+            <sebm-google-map-marker
+              *ngFor="let m of markerTalents; let i = index"
+              (markerClick)="clickedMarker(m.label, i)"
+              [latitude]="m.lat"
+              [longitude]="m.lng"
+              [label]="m.label"
+              [markerDraggable]="m.draggable"
+            ></sebm-google-map-marker>
+          </sebm-google-map>
+          <div class="divider divider-center"><i class="icon-circle"></i></div>
+
           <a (click)="changeStep('inputStep')" class="button button-3d nomargin tab-linker" rel="1">Saisir ma
             demande</a>
           <a (click)="changeStep('selectTalentStep')" class="button button-3d nomargin fright tab-linker" rel="3">Choisir
@@ -122,6 +156,93 @@
             est in sunt et corrupti adipisci quibusdam praesentium optio laborum tempora ipsam aut cum consectetur
             veritatis dolorem.</p>
           <div class="line"></div>
+          <div class="container clearfix">
+
+            <div class="pricing bottommargin clearfix">
+
+              <div class="col-sm-4">
+
+                <div class="pricing-box">
+                  <div class="pricing-title">
+                    <h3>Starter</h3>
+                  </div>
+                  <div class="pricing-price">
+                    <span class="price-unit">&euro;</span>7<span class="price-tenure">/mo</span>
+                  </div>
+                  <div class="pricing-features">
+                    <ul>
+                      <li><strong>Full</strong> Access</li>
+                      <li><i class="icon-code"></i> Source Files</li>
+                      <li><strong>100</strong> User Accounts</li>
+                      <li><strong>1 Year</strong> License</li>
+                      <li>Phone &amp; Email Support</li>
+                    </ul>
+                  </div>
+                  <div class="pricing-action">
+                    <a href="#" class="btn btn-danger btn-block btn-lg">Sign Up</a>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-4">
+
+                <div class="pricing-box best-price">
+                  <div class="pricing-title">
+                    <h3>Professional</h3>
+                    <span>Most Popular</span>
+                  </div>
+                  <div class="pricing-price">
+                    <span class="price-unit">&euro;</span>12<span class="price-tenure">/mo</span>
+                  </div>
+                  <div class="pricing-features">
+                    <ul>
+                      <li><strong>Full</strong> Access</li>
+                      <li><i class="icon-code"></i> Source Files</li>
+                      <li><strong>1000</strong> User Accounts</li>
+                      <li><strong>2 Years</strong> License</li>
+                      <li><i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i></li>
+                    </ul>
+                  </div>
+                  <div class="pricing-action">
+                    <a href="#" class="btn btn-danger btn-block btn-lg bgcolor border-color">Sign Up</a>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-4">
+
+                <div class="pricing-box">
+                  <div class="pricing-title">
+                    <h3>Business</h3>
+                  </div>
+                  <div class="pricing-price">
+                    <span class="price-unit">&euro;</span>19<span class="price-tenure">/mo</span>
+                  </div>
+                  <div class="pricing-features">
+                    <ul>
+                      <li><strong>Full</strong> Access</li>
+                      <li><i class="icon-code"></i> Source Files</li>
+                      <li><strong>500</strong> User Accounts</li>
+                      <li><strong>3 Years</strong> License</li>
+                      <li>Phone &amp; Email Support</li>
+                    </ul>
+                  </div>
+                  <div class="pricing-action">
+                    <a href="#" class="btn btn-danger btn-block btn-lg">Sign Up</a>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="divider divider-center"><i class="icon-circle"></i></div>
           <a (click)="changeStep('notifyStep')" class="button button-3d nomargin tab-linker" rel="2">Choisir le
             TalentWorker</a>
           <a (click)="changeStep('buyStep')" class="button button-3d nomargin fright tab-linker" rel="4">Payer le
@@ -141,7 +262,6 @@
 
       <div class="clear"></div>
 
-      <div class="divider divider-center"><i class="icon-circle"></i></div>
 
       <div class="line visible-xs"></div>
 
