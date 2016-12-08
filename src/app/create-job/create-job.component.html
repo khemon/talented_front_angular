@@ -25,38 +25,38 @@
 
         <ul class="process-steps process-5 clearfix">
 
-          <li [ngClass]="{'active': step==='inputStep'}">
+          <li [ngClass]="{'active': step===steps.INPUT_REQUEST_STEP}">
             <span href="#" class="i-bordered i-circled i-alt divcenter bgcolor icon-pencil2"
-                  (click)="changeStep('inputStep')"></span>
+                  (click)="changeStep(steps.INPUT_REQUEST_STEP)"></span>
             <h5>Je saisis ma demande</h5>
           </li>
-          <li [ngClass]="{'active': step==='notifyStep'}">
+          <li [ngClass]="{'active': step===steps.NOTIFY_STEP}">
             <span href="#" class="i-bordered i-circled divcenter icon-bullhorn"
-                  (click)="changeStep('notifyStep')"></span>
+                  (click)="changeStep(steps.NOTIFY_STEP)"></span>
             <h5>J'avertis les talents à proximité</h5>
           </li>
-          <li [ngClass]="{'active': step==='selectTalentStep'}">
+          <li [ngClass]="{'active': step===steps.SELECT_TALEENT_STEP}">
             <span href="#" class="i-bordered i-circled i-alt divcenter bgcolor icon-like"
-                  (click)="changeStep('selectTalentStep')"></span>
+                  (click)="changeStep(steps.SELECT_TALEENT_STEP)"></span>
             <h5>Je choisi le meilleur talent</h5>
           </li>
-          <li [ngClass]="{'active': step==='buyStep'}">
-            <span href="#" class="i-bordered i-circled divcenter icon-money" (click)="changeStep('buyStep')"></span>
+          <li [ngClass]="{'active': step===steps.BUY_STEP}">
+            <span href="#" class="i-bordered i-circled divcenter icon-money" (click)="changeStep(steps.BUY_STEP)"></span>
             <h5>Je paie</h5>
           </li>
-          <li [ngClass]="{'active': step==='doneStep'}">
-            <span href="#" class="i-bordered i-circled divcenter icon-ok" (click)="changeStep('doneStep')"></span>
+          <li [ngClass]="{'active': step===steps.DONE_STEP}">
+            <span href="#" class="i-bordered i-circled divcenter icon-ok" (click)="changeStep(steps.DONE_STEP)"></span>
             <h5>C'est fini !</h5>
           </li>
         </ul>
 
-        <div class="container clearfix" id="ptab1" *ngSwitchCase="'inputStep'">
+        <div class="container clearfix" id="ptab1" *ngSwitchCase="steps.INPUT_REQUEST_STEP">
           <div>
             <h3>Où ?</h3>
             <div class="nobottommargin">
               <div class="input-group input-group-lg">
                 <span class="input-group-addon"><i class="icon-map-marker"></i></span>
-                <input type="text" id="location-input" name="location-input" class="form-control"
+                <input #autocompleteInput type="text" id="location-input" name="location-input" class="form-control"
                        id="autocompleteInput" [(ngModel)]="address"
                        placeholder="Où est-ce que j'ai besoin d'un service de {{jobType}} ?">
                 <span class="input-group-btn">
@@ -67,22 +67,22 @@
 
             </div>
             <!--<div *ngIf="mapReady" id="map"></div>-->
-            <sebm-google-map [latitude]="lat"
-                             [longitude]="lng"
+            <sebm-google-map [latitude]="jobRequest.latitude"
+                             [longitude]="jobRequest.longitude"
                              [zoom]="zoom"
                              [disableDefaultUI]="false"
-                             [zoomControl]="false"
-                             (mapClick)="mapClicked($event)">
+                             [zoomControl]="false">
               <sebm-google-map-marker
-                (markerClick)="clickedMarker(markerService.label, i)"
-                [latitude]="markerService.lat"
-                [longitude]="markerService.lng"
-                [label]="markerService.label"
-                [markerDraggable]="markerService.draggable"
-              ></sebm-google-map-marker>
-              <sebm-google-map-info-window>
-                <strong>{{jobType}} à faire ici</strong>
-              </sebm-google-map-info-window>
+                [latitude]="jobRequest.latitude"
+                [longitude]="jobRequest.longitude"
+                [label]=""
+                [markerDraggable]="false"
+              >
+                <sebm-google-map-info-window>
+                  <strong>{{jobType}} à faire ici</strong>
+                </sebm-google-map-info-window>
+              </sebm-google-map-marker>
+
             </sebm-google-map>
           </div>
           <div class="line"></div>
@@ -92,7 +92,7 @@
               <div class="input-daterange travel-date-group bottommargin-sm">
                 <div class="row">
                   <div class="col-sm-6 bottommargin-sm">
-                    <input type="date" value="" class="sm-form-control tleft today" placeholder="MM/DD/YYYY">
+                    <input  type="date"  value ="2016-12-31" class="sm-form-control tleft today" placeholder="MM/DD/YYYY">
                   </div>
                 </div>
               </div>
@@ -105,17 +105,17 @@
               <label for="template-contactform-message">Detaillez brièvememnt ce dont vous avez besoin
                 <small>*</small>
               </label>
-              <textarea class="required sm-form-control" id="template-contactform-message"
+              <textarea [(ngModel)]="jobRequest.description" class="required sm-form-control" id="template-contactform-message"
                         name="template-contactform-message" rows="6" cols="30"></textarea>
             </div>
             <div class="divider divider-center"><i class="icon-circle"></i></div>
-            <a (click)="changeStep('notifyStep')" class="button button-3d nomargin fright tab-linker" rel="3">Etape
+            <a (click)="changeStep(steps.NOTIFY_STEP)" class="button button-3d nomargin fright tab-linker" rel="3">Etape
               Suivante</a>
           </div>
 
         </div>
 
-        <div id="ptab2" *ngSwitchCase="'notifyStep'">
+        <div id="ptab2" *ngSwitchCase="steps.NOTIFY_STEP">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, deleniti, atque soluta ratione
             blanditiis maxime at architecto laudantium eius eaque distinctio dolorem voluptatem nam ab molestias velit
             nemo. Illo, hic.</p>
@@ -124,31 +124,36 @@
             non deserunt repellat eius rem dolorem corporis temporibus voluptatibus ut! Quod, corporis, tempora,
             dolore, sint earum minus deserunt eveniet natus error magnam aliquam nemo.</p>
           <div class="line"></div>
-          <!--<div *ngIf="mapReady" id="map"></div>-->
-          <sebm-google-map [latitude]="lat"
-                           [longitude]="lng"
-                           [zoom]="zoom"
+          <h4><strong>{{mapTalent.nbUsers}}</strong>  Talents sont disponibles à proximité pour vous rendre service.</h4>
+          <sebm-google-map [latitude]="jobRequest.latitude"
+                           [longitude]="jobRequest.longitude"
+                           [zoom]="12"
                            [disableDefaultUI]="false"
                            [zoomControl]="false"
                            (mapClick)="mapClicked($event)">
             <sebm-google-map-marker
-              *ngFor="let m of markerTalents; let i = index"
+              *ngFor="let m of mapTalent.markerTalents; let i = index"
               (markerClick)="clickedMarker(m.label, i)"
               [latitude]="m.lat"
               [longitude]="m.lng"
-              [label]="m.label"
+              [label]=""
               [markerDraggable]="m.draggable"
-            ></sebm-google-map-marker>
+            >
+              <sebm-google-map-info-window>
+                <strong>{{m.name}} est disponible !</strong>
+              </sebm-google-map-info-window>
+            </sebm-google-map-marker>
+
           </sebm-google-map>
           <div class="divider divider-center"><i class="icon-circle"></i></div>
 
-          <a (click)="changeStep('inputStep')" class="button button-3d nomargin tab-linker" rel="1">Saisir ma
+          <a (click)="changeStep(steps.INPUT_REQUEST_STEP)" class="button button-3d nomargin tab-linker" rel="1">Saisir ma
             demande</a>
-          <a (click)="changeStep('selectTalentStep')" class="button button-3d nomargin fright tab-linker" rel="3">Choisir
+          <a (click)="changeStep(steps.SELECT_TALEENT_STEP)" class="button button-3d nomargin fright tab-linker" rel="3">Choisir
             le TalentWorker</a>
         </div>
 
-        <div id="ptab3" *ngSwitchCase="'selectTalentStep'">
+        <div id="ptab3" *ngSwitchCase="steps.SELECT_TALEENT_STEP">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, sit, culpa, placeat, tempora
             quibusdam molestiae cupiditate atque tempore nemo tenetur facere voluptates autem aliquid provident
             distinctio beatae odio maxime pariatur eos ratione quae itaque quod. Distinctio, temporibus, cupiditate,
@@ -243,17 +248,17 @@
             </div>
           </div>
           <div class="divider divider-center"><i class="icon-circle"></i></div>
-          <a (click)="changeStep('notifyStep')" class="button button-3d nomargin tab-linker" rel="2">Choisir le
+          <a (click)="changeStep(steps.NOTIFY_STEP)" class="button button-3d nomargin tab-linker" rel="2">Choisir le
             TalentWorker</a>
-          <a (click)="changeStep('buyStep')" class="button button-3d nomargin fright tab-linker" rel="4">Payer le
+          <a (click)="changeStep(steps.BUY_STEP)" class="button button-3d nomargin fright tab-linker" rel="4">Payer le
             service</a>
         </div>
-        <div id="ptab4" *ngSwitchCase="'buyStep'">
+        <div id="ptab4" *ngSwitchCase="steps.BUY_STEP">
           <div class="alert alert-success">
             <strong>Merci de votre confiance</strong> Votre talent va prendre contact avec vous.
           </div>
         </div>
-        <div id="ptab4" *ngSwitchCase="'doneStep'">
+        <div id="ptab4" *ngSwitchCase="steps.DONE_STEP">
           <div class="alert alert-success">
             <strong>votre service est pris en charge.</strong>
           </div>

@@ -39,6 +39,7 @@ import {UsersComponent} from "./tutorial/users.component";*/
 import { OpaqueToken } from "@angular/core";
 // Configuration accessible depuis tous les services
 import {APP_CONFIG, TALENTED_DI_CONFIG } from './app-config'
+import {UserService} from "./service/user.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -70,6 +71,7 @@ type StoreType = {
     TalentComponent,
     ListUsersComponent,
     CreateJobComponent
+
     /*,XLarge*/
   ],
   imports: [ // import Angular's modules
@@ -88,7 +90,8 @@ type StoreType = {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    {provide: APP_CONFIG, useValue: TALENTED_DI_CONFIG}
+    {provide: APP_CONFIG, useValue: TALENTED_DI_CONFIG},
+    UserService
   ]
 })
 

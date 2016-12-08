@@ -10,19 +10,20 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class UserService {
-  private userUrl = 'user'
-  private apiEndPoint;
-
+  private apiEndPoint = 'user';
+  private apiUrl;
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http) {
     // Base URL for Talented API
-    this.apiEndPoint = config.apiEndPoint;
+    this.apiUrl = config.apiUrl;
   }
 
   /**
    * Retourne la liste des utilisateurs de la BDD
    */
   getUsers(): Observable<User[]>{
-    return this.http.get(this.apiEndPoint + this.userUrl)
+    var url = this.apiUrl + this.apiEndPoint;
+    var urlMockData = 'app/in-memory-data/users.json';
+    return this.http.get(urlMockData)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -32,7 +33,14 @@ export class UserService {
    * aux alentours d'un job donné
    * Signature : getUsersAvailableByJob(Job job);
    */
-  //getUsersAvailableByJob() : Observable<User[]>{}
+  getTalentsAvailableByJob() : Observable<User[]>{
+    //TODO: fake implementation for Front end purpose only
+    var url = this.apiUrl + this.apiEndPoint;
+    var urlMockData = 'app/in-memory-data/talents.json';
+    return this.http.get(urlMockData)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
 
   /**
@@ -48,7 +56,7 @@ export class UserService {
     let userString = JSON.stringify(user);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    return this.http.post(this.apiEndPoint + 'user/add', userString, options)
+    return this.http.post(this.apiUrl + 'user/add', userString, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

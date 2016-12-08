@@ -2,7 +2,7 @@ import { Component, AfterViewChecked, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import {User} from '../model/user';
-import {UserService} from '../list-users/user.service';
+import {UserService} from '../service/user.service';
 /*
  * We're loading this component asynchronously
  * We are using some magic with es6-promise-loader that will wrap the module with a Promise
@@ -20,7 +20,7 @@ console.log('`Register` component loaded asynchronously');
 })
 export class RegisterComponent {
   jobTypes = ['Cleaning', 'Delivery', 'Transport', 'Teach', 'Baby-Sitting']
-  user = new User(18, '', '', '', '', '', '');
+  user: User;
   users: User[];
   errorMessage: any;
   submitted = false

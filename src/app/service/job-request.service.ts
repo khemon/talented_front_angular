@@ -3,29 +3,43 @@
  */
 import {Injectable, Inject} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
-import {JobType} from '../model/job-type';
+import {JobRequest} from '../model/job-request';
 import {Observable} from 'rxjs/Observable';
 import {AppConfig, APP_CONFIG} from '../app-config';
 import 'rxjs/Rx';
 
 @Injectable()
-export class JobTypeService {
-  private userUrl = 'jobType'
-  private apiEndPoint;
+export class JobRequestService {
+  private apiEndPoint = 'jobRequest';
+  private apiUrl;
 
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http) {
     // Base URL for Talented API
-    this.apiEndPoint = config.apiEndPoint;
+    this.apiUrl = config.apiUrl;
   }
 
   /**
-   * Retourne la liste des types de jobs de la BDD
+   * Retourne la liste des job request de la BDD
    */
-  getJobTypes(): Observable<JobType[]>{
-    //var url = this.apiEndPoint + this.userUrl;
+  getJobRequests(): Observable<JobRequest[]>{
+    //var url = this.apiUrl + this.apiEndPoint;
     //TODO: remove this url once backend is ready
-    var url = 'app/in-memory-data/job-types.json';
+    var url = 'app/in-memory-data/job-request.json';
     return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  /**
+   * post a new job request to server
+   * @param user
+   * @returns {Observable<JobRequest>}
+   */
+  addJobRequest(jobRequest: JobRequest): Observable<JobRequest> {
+    let userString = JSON.stringify(jobRequest);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.apiUrl + 'jobRequest/add', userString, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

@@ -1,3 +1,4 @@
+import {JobType} from "./job-type";
 /**
  * Created by Khémon on 23/11/2016.
  */
@@ -6,12 +7,18 @@
 export class User {
   constructor(
     public id: number,
-    public name: string ,
-    public userName?: string,
-    public password?: string,
+    public name: string,
+    public username?: string,
     public email?: string,
-    public jobType?: string,
-    public phone?: string
-
+    public password?: string,
+    public address?: string,
+    public latitude?: number,
+    public longitude?: number,
+    public jobTypes?: JobType[],
+    public phone?: string,
+    public about?: string,
+    public registered?: Date,
+    public age?: number,
+    public picture?: string
   ) {  }
 }

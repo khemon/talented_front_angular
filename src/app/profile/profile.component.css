@@ -1,3 +1,4 @@
-li a {
+li > a {
   cursor: pointer;
+  cursor: hand;
 }

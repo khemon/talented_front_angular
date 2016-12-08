@@ -1,35 +1,42 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import { AppState } from '../app.service';
+import {JobTypeService} from "../service/job-type.service";
+import {JobType} from "../model/job-type";
+import {Utils} from "../utils/utils";
 
 @Component({
-  // The selector is what angular internally uses
-  // for `document.querySelectorAll(selector)` in our index.html
-  // where, in this case, selector is the string 'home'
   selector: 'home',  // <home></home>
-  // Our list of styles in our component. We may add more to compose many styles together
   styleUrls: ['./home.component.css'],
-  // Every Angular template is first compiled by the browser before Angular runs it's compiler
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  providers: [JobTypeService, Utils]
 })
 export class HomeComponent {
   // Set our default values
   localState = {value: ''};
-  // TypeScript public modifiers
-  public items: Array<string> = ['Ménage', 'Déménagement', "Bricolage", 'Livraison', 'Baby-Sitting', "Cours/Coaching",'Transport de colis', 'Cuisine'];
+  errorMessage: string;
+  public jobTypes: Array<any>;
 
   private value: any = {};
   private _disabledV: string = '0';
   private disabled: boolean = false;
 
-  constructor(public appState: AppState,
-              private router: Router) {
+  constructor(private router: Router,
+              private jobTypeService: JobTypeService,
+              private utils: Utils) {
 
   }
 
   ngOnInit() {
     console.log('hello `Home` component');
-    // this.title.getData().subscribe(data => this.data = data);
+    this.getJobTypes();
+  }
+  getJobTypes():void {
+    this.jobTypeService.getJobTypes()
+      .subscribe(
+        jobTypes => this.jobTypes = this.utils.transformJobTypes(jobTypes),
+        error => this.errorMessage = <any>error);
+
   }
 
 

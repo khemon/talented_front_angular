@@ -1,13 +1,15 @@
+/**
+ * Created by Khémon on 07/12/2016.
+ */
 {
-  id: 11,
-  name: 'Mr. Nice'
-},
-{id: 12, name: 'Narco'},
-{id: 13, name: 'Bombasto'},
-{id: 14, name: 'Celeritas'},
-{id: 15, name: 'Magneta'},
-{id: 16, name: 'RubberMan'},
-{id: 17, name: 'Dynama'},
-{id: 18, name: 'Dr IQ'},
-{id: 19, name: 'Magma'},
-{id: 20, name: 'Tornado'}
+  "data": [
+    {
+      "jobType": "Ménage",
+      "address": "91170 Viry-Châtillon, France",
+      "latitude": "48.66721219999999",
+      "longitude": "2.370790100000022",
+      "date" : "25/12/2016",
+      "description": "Ménage de mon studio de 30 m2 à Paris"
+    }
+  ]
+}

@@ -4,7 +4,9 @@
 import {Router} from '@angular/router';
 import {Component} from '@angular/core';
 import {User} from '../model/user';
-import {UserService} from "./user.service";
+import {UserService} from "../service/user.service";
+import {JobTypeService} from "../service/job-type.service";
+import {JobType} from "../model/job-type";
 
 console.log('`list-users` component loaded asynchronously');
 
@@ -12,7 +14,7 @@ console.log('`list-users` component loaded asynchronously');
   //moduleId: module.id,
   selector: 'list-users',
   templateUrl: './list-users.component.html',
-  providers: [UserService]
+  providers: [UserService, JobTypeService]
 })
 
 export class ListUsersComponent {
@@ -20,9 +22,11 @@ export class ListUsersComponent {
   errorMessage: string;
   users: User[];
   selectedUser: User;
+  jobTypes: Array<JobType>;
   mode = 'Observable';
 
   constructor(private userService: UserService,
+              private jobTypeService: JobTypeService,
               private router: Router) {
   }
 
@@ -34,7 +38,12 @@ export class ListUsersComponent {
 
   }
 
-
+  getJobTypes():void{
+    this.jobTypeService.getJobTypes()
+      .subscribe(
+        jobTypes => this.jobTypes = jobTypes,
+        error => this.errorMessage = <any>error);
+  }
   onSelect(user: User): void {
     this.selectedUser = user;
   }
@@ -50,6 +59,7 @@ export class ListUsersComponent {
   }
 
   ngOnInit(): void {
-    this.getUsers()
+    this.getUsers();
+    this.getJobTypes();
   }
 }
