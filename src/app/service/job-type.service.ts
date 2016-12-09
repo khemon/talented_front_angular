@@ -10,7 +10,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class JobTypeService {
-  private apiEndPoint = 'jobType'
+  private apiEndPoint = 'talent'
   private apiUrl;
   private mockDataUrl;
 
@@ -24,9 +24,9 @@ export class JobTypeService {
    * Retourne la liste des types de jobs de la BDD
    */
   getJobTypes(): Observable<JobType[]>{
-    //var url = this.apiUrl + this.apiEndPoint;
+    var url = this.apiUrl + this.apiEndPoint;
     //TODO: remove this url once backend is ready
-    var url = this.mockDataUrl+'job-types.json';
+    //var url = this.mockDataUrl+'job-types.json';
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

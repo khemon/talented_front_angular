@@ -10,7 +10,8 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class UserService {
-  private apiEndPoint = 'user';
+  private apiEndPointUser = 'user';
+  private apiEndPointTalent = 'talent';
   private apiUrl;
   private mockDataUrl;
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http) {
@@ -24,8 +25,8 @@ export class UserService {
    */
   getUsers(): Observable<User[]>{
     var url = this.apiUrl + this.apiEndPoint;
-    var urlMockData = this.mockDataUrl+'talents.json';
-    return this.http.get(urlMockData)
+    //var urlMockData = this.mockDataUrl+'talents.json';
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -33,8 +34,8 @@ export class UserService {
   /**TODO
   * Retourne un utilisateur à partir de son Id
   */
-  getUserById(): Observable<User[]>{
-    var url = this.apiUrl + this.apiEndPoint;
+  getUserById(id: Integer): Observable<User[]>{
+    var url = this.apiUrl + this.apiEndPointUser + '/' + id;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
@@ -47,9 +48,9 @@ export class UserService {
    */
   getTalentsAvailableByJob() : Observable<User[]>{
     //TODO: fake implementation for Front end purpose only
-    var url = this.apiUrl + this.apiEndPoint;
-    var urlMockData = this.mockDataUrl+'talents.json';
-    return this.http.get(urlMockData)
+    var url = this.apiUrl + this.apiEndPointUser;
+    //var urlMockData = this.mockDataUrl+'talents.json';
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
