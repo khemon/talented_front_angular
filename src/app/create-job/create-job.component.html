@@ -1,6 +1,6 @@
 <!-- Page Title
 		============================================= -->
-<section id="page-title">
+<section id="page-title" class="page-title-mini">
 
   <div class="container clearfix">
     <h1>Service de {{jobType}}</h1>
@@ -11,7 +11,8 @@
     </ol>
   </div>
 
-</section><!-- #page-title end -->
+</section>
+<!-- #page-title end -->
 
 <!-- Content
     =============================================-->
@@ -116,15 +117,7 @@
         </div>
 
         <div id="ptab2" *ngSwitchCase="steps.NOTIFY_STEP">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, deleniti, atque soluta ratione
-            blanditiis maxime at architecto laudantium eius eaque distinctio dolorem voluptatem nam ab molestias velit
-            nemo. Illo, hic.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, modi, odit, aspernatur veritatis
-            ipsum molestiae impedit iusto blanditiis voluptatem ab voluptas ullam expedita repellendus porro assumenda
-            non deserunt repellat eius rem dolorem corporis temporibus voluptatibus ut! Quod, corporis, tempora,
-            dolore, sint earum minus deserunt eveniet natus error magnam aliquam nemo.</p>
-          <div class="line"></div>
-          <h4><strong>{{mapTalent.nbUsers}}</strong>  Talents sont disponibles à proximité pour vous rendre service.</h4>
+          <h4><strong>{{mapTalent.nbUsers}}</strong>  Talents sont disponibles à proximité et sont maintenant avertis de votre besoin.</h4>
           <sebm-google-map [latitude]="jobRequest.latitude"
                            [longitude]="jobRequest.longitude"
                            [zoom]="12"
@@ -145,6 +138,11 @@
             </sebm-google-map-marker>
 
           </sebm-google-map>
+          <div class="line"></div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, deleniti, atque soluta ratione
+            blanditiis maxime at architecto laudantium eius eaque distinctio dolorem voluptatem nam ab molestias velit
+            nemo. Illo, hic.</p>
+
           <div class="divider divider-center"><i class="icon-circle"></i></div>
 
           <a (click)="changeStep(steps.INPUT_REQUEST_STEP)" class="button button-3d nomargin tab-linker" rel="1">Saisir ma
@@ -154,13 +152,17 @@
         </div>
 
         <div id="ptab3" *ngSwitchCase="steps.SELECT_TALEENT_STEP">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, sit, culpa, placeat, tempora
-            quibusdam molestiae cupiditate atque tempore nemo tenetur facere voluptates autem aliquid provident
-            distinctio beatae odio maxime pariatur eos ratione quae itaque quod. Distinctio, temporibus, cupiditate,
-            eaque vero illo molestiae vel doloremque dolorum repellat ullam possimus modi dicta eum debitis ratione
-            est in sunt et corrupti adipisci quibusdam praesentium optio laborum tempora ipsam aut cum consectetur
-            veritatis dolorem.</p>
+          <h3>Choississez votre TalentWorker</h3>
           <div class="line"></div>
+          <list-users [limit]="3"></list-users>
+
+          <div class="divider divider-center"><i class="icon-circle"></i></div>
+          <a (click)="changeStep(steps.NOTIFY_STEP)" class="button button-3d nomargin tab-linker" rel="2">Choisir le
+            TalentWorker</a>
+          <a (click)="changeStep(steps.BUY_STEP)" class="button button-3d nomargin fright tab-linker" rel="4">Payer le
+            service</a>
+        </div>
+        <div id="ptab4" *ngSwitchCase="steps.BUY_STEP">
           <div class="container clearfix">
 
             <div class="pricing bottommargin clearfix">
@@ -247,21 +249,13 @@
 
             </div>
           </div>
-          <div class="divider divider-center"><i class="icon-circle"></i></div>
-          <a (click)="changeStep(steps.NOTIFY_STEP)" class="button button-3d nomargin tab-linker" rel="2">Choisir le
-            TalentWorker</a>
-          <a (click)="changeStep(steps.BUY_STEP)" class="button button-3d nomargin fright tab-linker" rel="4">Payer le
-            service</a>
-        </div>
-        <div id="ptab4" *ngSwitchCase="steps.BUY_STEP">
-          <div class="alert alert-success">
-            <strong>Merci de votre confiance</strong> Votre talent va prendre contact avec vous.
-          </div>
+
         </div>
         <div id="ptab4" *ngSwitchCase="steps.DONE_STEP">
           <div class="alert alert-success">
-            <strong>votre service est pris en charge.</strong>
+            <strong>Merci de votre confiance</strong> Votre talent va prendre contact avec vous.
           </div>
+
         </div>
       </div>
 

@@ -12,10 +12,12 @@ import 'rxjs/Rx';
 export class JobTypeService {
   private apiEndPoint = 'jobType'
   private apiUrl;
+  private mockDataUrl;
 
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http) {
     // Base URL for Talented API
     this.apiUrl = config.apiUrl;
+    this.mockDataUrl = config.mockDataUrl;
   }
 
   /**
@@ -24,7 +26,7 @@ export class JobTypeService {
   getJobTypes(): Observable<JobType[]>{
     //var url = this.apiUrl + this.apiEndPoint;
     //TODO: remove this url once backend is ready
-    var url = 'app/in-memory-data/job-types.json';
+    var url = this.mockDataUrl+'job-types.json';
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

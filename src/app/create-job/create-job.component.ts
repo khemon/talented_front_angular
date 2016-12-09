@@ -33,7 +33,6 @@ export class CreateJobComponent {
   private jobRequest: JobRequest;
   private errorMessage: string;
 
-
   //@ViewChild('autocompleteInput') inputAddress: ElementRef;
   constructor(private route: ActivatedRoute,
               private __loader: MapsAPILoader,

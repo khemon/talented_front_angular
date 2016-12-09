@@ -21,16 +21,15 @@ import  { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
-import { AboutComponent } from './about';
 import { ContactComponent } from './contact';
 import { NoContentComponent } from './no-content';
 import {LoginComponent} from "./login";
 import {RegisterComponent} from "./register";
 import {ProfileComponent} from "./profile";
 import {TalentComponent} from "./talent";
-import {ListUsersComponent} from "./list-users";
+import {ListUsersComponent} from "./list-users-search/list-users";
 import { InMemoryWebApiModule} from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data/in-memory-data.service';
+import { InMemoryDataService }  from './model/in-memory-data/in-memory-data.service';
 import {CreateJobComponent} from "./create-job";
 
 /*import {TalentsComponent} from "./talents";
@@ -40,6 +39,9 @@ import { OpaqueToken } from "@angular/core";
 // Configuration accessible depuis tous les services
 import {APP_CONFIG, TALENTED_DI_CONFIG } from './app-config'
 import {UserService} from "./service/user.service";
+import {ListUsersSearchComponent} from "./list-users-search/list-users-search.component";
+import {HeaderComponent} from "./layout/header/header.component";
+import {FooterComponent} from "./layout/footer/footer.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -61,15 +63,17 @@ type StoreType = {
   declarations: [
     AppComponent,
     //Ng2SelectModule,
+    HeaderComponent,
+    FooterComponent,
     LoginComponent,
     RegisterComponent,
     ContactComponent,
-    AboutComponent,
     HomeComponent,
     NoContentComponent,
     ProfileComponent,
     TalentComponent,
     ListUsersComponent,
+    ListUsersSearchComponent,
     CreateJobComponent
 
     /*,XLarge*/

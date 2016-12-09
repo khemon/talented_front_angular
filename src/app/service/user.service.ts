@@ -12,9 +12,11 @@ import 'rxjs/Rx';
 export class UserService {
   private apiEndPoint = 'user';
   private apiUrl;
+  private mockDataUrl;
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http) {
     // Base URL for Talented API
     this.apiUrl = config.apiUrl;
+    this.mockDataUrl = config.mockDataUrl;
   }
 
   /**
@@ -22,8 +24,18 @@ export class UserService {
    */
   getUsers(): Observable<User[]>{
     var url = this.apiUrl + this.apiEndPoint;
-    var urlMockData = 'app/in-memory-data/users.json';
+    var urlMockData = this.mockDataUrl+'talents.json';
     return this.http.get(urlMockData)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  /**TODO
+  * Retourne un utilisateur à partir de son Id
+  */
+  getUserById(): Observable<User[]>{
+    var url = this.apiUrl + this.apiEndPoint;
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -36,7 +48,7 @@ export class UserService {
   getTalentsAvailableByJob() : Observable<User[]>{
     //TODO: fake implementation for Front end purpose only
     var url = this.apiUrl + this.apiEndPoint;
-    var urlMockData = 'app/in-memory-data/talents.json';
+    var urlMockData = this.mockDataUrl+'talents.json';
     return this.http.get(urlMockData)
       .map(this.extractData)
       .catch(this.handleError);

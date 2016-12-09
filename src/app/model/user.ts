@@ -6,7 +6,7 @@ import {JobType} from "./job-type";
 
 export class User {
   constructor(
-    public id: number,
+    public id: string,
     public name: string,
     public username?: string,
     public email?: string,
@@ -19,6 +19,7 @@ export class User {
     public about?: string,
     public registered?: Date,
     public age?: number,
-    public picture?: string
+    public picture?: string,
+    public hourlyRate?:string
   ) {  }
 }

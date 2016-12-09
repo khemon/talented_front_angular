@@ -1,0 +1,49 @@
+<!-- Page Title
+		============================================= -->
+<section id="page-title" class="page-title-mini">
+
+  <div class="container clearfix">
+    <h1>Talents</h1>
+    <span>Choisissez votre TalentWorker</span>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active">TalentWorkers</li>
+    </ol>
+  </div>
+
+</section><!-- #page-title end -->
+
+<!-- Content
+    ============================================= -->
+<section id="content">
+
+  <div class="content-wrap">
+
+    <div class="container clearfix">
+
+      <!-- Sidebar
+           ============================================= -->
+      <div class="sidebar nobottommargin">
+        <div class="sidebar-widgets-wrap">
+          <div class="widget widget_links clearfix">
+            <h4>Filtrer par service</h4>
+            <ul class="custom-filter" data-container="#shop" data-active-class="active-filter">
+              <li class="widget-filter-reset active-filter" *ngFor="let jobType of jobTypes"><a href="#"
+                                                                                                data-filter="*">{{jobType.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- .sidebar end -->
+      <!-- Post Content
+          ============================================= -->
+      <div class="postcontent nobottommargin col_last">
+
+     <list-users></list-users>
+        </div>
+    </div>
+
+  </div>
+
+</section><!-- #content end -->
