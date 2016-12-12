@@ -33,8 +33,8 @@ export class UserService {
   /**TODO
   * Retourne un utilisateur à partir de son Id
   */
-  getUserById(): Observable<User[]>{
-    var url = this.apiUrl + this.apiEndPoint;
+  getUserById(id: string): Observable<User[]>{
+    var url = this.apiUrl + this.apiEndPoint + '/' + id;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
