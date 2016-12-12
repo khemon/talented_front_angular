@@ -42,7 +42,8 @@
             <h5>Je choisi le meilleur talent</h5>
           </li>
           <li [ngClass]="{'active': step===steps.BUY_STEP}">
-            <span href="#" class="i-bordered i-circled divcenter icon-money" (click)="changeStep(steps.BUY_STEP)"></span>
+            <span href="#" class="i-bordered i-circled divcenter icon-money"
+                  (click)="changeStep(steps.BUY_STEP)"></span>
             <h5>Je paie</h5>
           </li>
           <li [ngClass]="{'active': step===steps.DONE_STEP}">
@@ -67,15 +68,17 @@
               </div>
 
             </div>
+
+
             <!--<div *ngIf="mapReady" id="map"></div>-->
-            <sebm-google-map [latitude]="jobRequest.latitude"
-                             [longitude]="jobRequest.longitude"
+            <sebm-google-map [latitude]="job.location.latitude"
+                             [longitude]="job.location.longitude"
                              [zoom]="zoom"
                              [disableDefaultUI]="false"
                              [zoomControl]="false">
               <sebm-google-map-marker
-                [latitude]="jobRequest.latitude"
-                [longitude]="jobRequest.longitude"
+                [latitude]="job.location.latitude"
+                [longitude]="job.location.longitude"
                 [label]=""
                 [markerDraggable]="false"
               >
@@ -93,7 +96,7 @@
               <div class="input-daterange travel-date-group bottommargin-sm">
                 <div class="row">
                   <div class="col-sm-6 bottommargin-sm">
-                    <input  type="date"  value ="2016-12-31" class="sm-form-control tleft today" placeholder="MM/DD/YYYY">
+                    <input type="date" value="2016-12-31" class="sm-form-control tleft today" placeholder="MM/DD/YYYY">
                   </div>
                 </div>
               </div>
@@ -106,7 +109,7 @@
               <label for="template-contactform-message">Detaillez brièvememnt ce dont vous avez besoin
                 <small>*</small>
               </label>
-              <textarea [(ngModel)]="jobRequest.description" class="required sm-form-control" id="template-contactform-message"
+              <textarea [(ngModel)]="job.description" class="required sm-form-control" id="template-contactform-message"
                         name="template-contactform-message" rows="6" cols="30"></textarea>
             </div>
             <div class="divider divider-center"><i class="icon-circle"></i></div>
@@ -117,9 +120,10 @@
         </div>
 
         <div id="ptab2" *ngSwitchCase="steps.NOTIFY_STEP">
-          <h4><strong>{{mapTalent.nbUsers}}</strong>  Talents sont disponibles à proximité et sont maintenant avertis de votre besoin.</h4>
-          <sebm-google-map [latitude]="jobRequest.latitude"
-                           [longitude]="jobRequest.longitude"
+          <h4><strong>{{mapTalent.nbUsers}}</strong> Talents sont disponibles à proximité et sont maintenant avertis de
+            votre besoin.</h4>
+          <sebm-google-map [latitude]="job.location.latitude"
+                           [longitude]="job.location.longitude"
                            [zoom]="12"
                            [disableDefaultUI]="false"
                            [zoomControl]="false"
@@ -145,15 +149,16 @@
 
           <div class="divider divider-center"><i class="icon-circle"></i></div>
 
-          <a (click)="changeStep(steps.INPUT_REQUEST_STEP)" class="button button-3d nomargin tab-linker" rel="1">Saisir ma
+          <a (click)="changeStep(steps.INPUT_REQUEST_STEP)" class="button button-3d nomargin tab-linker" rel="1">Saisir
+            ma
             demande</a>
-          <a (click)="changeStep(steps.SELECT_TALEENT_STEP)" class="button button-3d nomargin fright tab-linker" rel="3">Choisir
+          <a (click)="changeStep(steps.SELECT_TALEENT_STEP)" class="button button-3d nomargin fright tab-linker"
+             rel="3">Choisir
             le TalentWorker</a>
         </div>
 
         <div id="ptab3" *ngSwitchCase="steps.SELECT_TALEENT_STEP">
           <h3>Choississez votre TalentWorker</h3>
-          <div class="line"></div>
           <list-users [limit]="3"></list-users>
 
           <div class="divider divider-center"><i class="icon-circle"></i></div>
@@ -164,92 +169,134 @@
         </div>
         <div id="ptab4" *ngSwitchCase="steps.BUY_STEP">
           <div class="container clearfix">
+            <div class="col-md-6">
+              <div class="table-responsive clearfix">
+                <h4>Votre demande</h4>
 
-            <div class="pricing bottommargin clearfix">
+                <table class="table cart">
+                  <thead>
+                  <tr>
+                    <th class="cart-product-thumbnail">&nbsp;</th>
+                    <th class="cart-product-name">Service</th>
+                    <th class="cart-product-quantity">Nombre d'heure</th>
+                    <th class="cart-product-subtotal">Total</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="cart_item">
+                    <td class="cart-product-thumbnail">
+                      <a href="#"><img width="64" height="64" src="../../assets/images/shop/thumbs/small/dress-3.jpg"
+                                       alt="Pink Printed Dress"></a>
+                    </td>
 
-              <div class="col-sm-4">
+                    <td class="cart-product-name">
+                      <a href="#">Pink Printed Dress</a>
+                    </td>
 
-                <div class="pricing-box">
-                  <div class="pricing-title">
-                    <h3>Starter</h3>
-                  </div>
-                  <div class="pricing-price">
-                    <span class="price-unit">&euro;</span>7<span class="price-tenure">/mo</span>
-                  </div>
-                  <div class="pricing-features">
-                    <ul>
-                      <li><strong>Full</strong> Access</li>
-                      <li><i class="icon-code"></i> Source Files</li>
-                      <li><strong>100</strong> User Accounts</li>
-                      <li><strong>1 Year</strong> License</li>
-                      <li>Phone &amp; Email Support</li>
-                    </ul>
-                  </div>
-                  <div class="pricing-action">
-                    <a href="#" class="btn btn-danger btn-block btn-lg">Sign Up</a>
-                  </div>
-                </div>
+                    <td class="cart-product-quantity">
+                      <div class="quantity clearfix">
+                        1x2
+                      </div>
+                    </td>
 
-              </div>
+                    <td class="cart-product-subtotal">
+                      <span class="amount">$39.98</span>
+                    </td>
+                  </tr>
+                  <tr class="cart_item">
+                    <td class="cart-product-thumbnail">
+                      <a href="#"><img width="64" height="64" src="../../assets/images/shop/thumbs/small/shoes-2.jpg"
+                                       alt="Checked Canvas Shoes"></a>
+                    </td>
 
-              <div class="col-sm-4">
+                    <td class="cart-product-name">
+                      <a href="#">Checked Canvas Shoes</a>
+                    </td>
 
-                <div class="pricing-box best-price">
-                  <div class="pricing-title">
-                    <h3>Professional</h3>
-                    <span>Most Popular</span>
-                  </div>
-                  <div class="pricing-price">
-                    <span class="price-unit">&euro;</span>12<span class="price-tenure">/mo</span>
-                  </div>
-                  <div class="pricing-features">
-                    <ul>
-                      <li><strong>Full</strong> Access</li>
-                      <li><i class="icon-code"></i> Source Files</li>
-                      <li><strong>1000</strong> User Accounts</li>
-                      <li><strong>2 Years</strong> License</li>
-                      <li><i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i></li>
-                    </ul>
-                  </div>
-                  <div class="pricing-action">
-                    <a href="#" class="btn btn-danger btn-block btn-lg bgcolor border-color">Sign Up</a>
-                  </div>
-                </div>
+                    <td class="cart-product-quantity">
+                      <div class="quantity clearfix">
+                        1x1
+                      </div>
+                    </td>
 
-              </div>
+                    <td class="cart-product-subtotal">
+                      <span class="amount">$24.99</span>
+                    </td>
+                  </tr>
 
-              <div class="col-sm-4">
+                  </tbody>
 
-                <div class="pricing-box">
-                  <div class="pricing-title">
-                    <h3>Business</h3>
-                  </div>
-                  <div class="pricing-price">
-                    <span class="price-unit">&euro;</span>19<span class="price-tenure">/mo</span>
-                  </div>
-                  <div class="pricing-features">
-                    <ul>
-                      <li><strong>Full</strong> Access</li>
-                      <li><i class="icon-code"></i> Source Files</li>
-                      <li><strong>500</strong> User Accounts</li>
-                      <li><strong>3 Years</strong> License</li>
-                      <li>Phone &amp; Email Support</li>
-                    </ul>
-                  </div>
-                  <div class="pricing-action">
-                    <a href="#" class="btn btn-danger btn-block btn-lg">Sign Up</a>
-                  </div>
-                </div>
+                </table>
 
               </div>
-
             </div>
-          </div>
+            <div class="col-md-6">
+              <div class="table-responsive">
+                <h4>Facture</h4>
 
+                <table class="table cart">
+                  <tbody>
+                  <tr class="cart_item">
+                    <td class="notopborder cart-product-name">
+                      <strong>Sous total</strong>
+                    </td>
+
+                    <td class="notopborder cart-product-name">
+                      <span class="amount">$106.94</span>
+                    </td>
+                  </tr>
+                  <tr class="cart_item">
+                    <td class="cart-product-name">
+                      <strong>Frais de dossier</strong>
+                    </td>
+
+                    <td class="cart-product-name">
+                      <span class="amount">Gratuit</span>
+                    </td>
+                  </tr>
+                  <tr class="cart_item">
+                    <td class="cart-product-name">
+                      <strong>Total</strong>
+                    </td>
+
+                    <td class="cart-product-name">
+                      <span class="amount color lead"><strong>$106.94</strong></span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+              </div>
+              <div class="accordion clearfix">
+                <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i
+                  class="acc-open icon-remove-circle"></i>Direct Bank Transfer
+                </div>
+                <div class="acc_content clearfix">Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam
+                  id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere
+                  velit aliquet.
+                </div>
+
+                <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i
+                  class="acc-open icon-remove-circle"></i>Cheque Payment
+                </div>
+                <div class="acc_content clearfix">Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+                  Duis mollis, est non commodo luctus. Aenean lacinia bibendum nulla sed consectetur. Cras mattis
+                  consectetur purus sit amet fermentum.
+                </div>
+
+                <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i
+                  class="acc-open icon-remove-circle"></i>Paypal
+                </div>
+                <div class="acc_content clearfix">Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere
+                  erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus. Aenean
+                  lacinia bibendum nulla sed consectetur.
+                </div>
+              </div>
+              <a (click)="changeStep(steps.DONE_STEP)" class="button button-3d fright">Payer</a>
+            </div>
+
+
+          </div>
         </div>
         <div id="ptab4" *ngSwitchCase="steps.DONE_STEP">
           <div class="alert alert-success">

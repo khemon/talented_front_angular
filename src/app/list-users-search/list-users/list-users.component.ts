@@ -4,7 +4,7 @@
 import {Component, Input} from '@angular/core';
 import {User} from '../../model/user';
 import {UserService} from "../../service/user.service";
-import {JobType} from "../../model/job-type";
+import {Talent} from "../../model/talent";
 import {Router} from "@angular/router";
 
 console.log('`list-users` component loaded asynchronously');
@@ -20,7 +20,7 @@ export class ListUsersComponent {
   limit: number; //limit the number of user to display
   errorMessage: string;
   users: User[];
-  jobTypes: Array<JobType>;
+  jobTypes: Array<Talent>;
 
   constructor(private router: Router,
               private userService: UserService) {

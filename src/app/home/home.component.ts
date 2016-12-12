@@ -1,28 +1,25 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
-import { AppState } from '../app.service';
-import {JobTypeService} from "../service/job-type.service";
-import {JobType} from "../model/job-type";
+import {TalentService} from "../service/talents.service";
 import {Utils} from "../utils/utils";
 
 @Component({
   selector: 'home',  // <home></home>
   styleUrls: ['./home.component.css'],
   templateUrl: './home.component.html',
-  providers: [JobTypeService, Utils]
+  providers: [TalentService, Utils]
 })
 export class HomeComponent {
   // Set our default values
   localState = {value: ''};
   errorMessage: string;
   public jobTypes: Array<any>;
-
   private value: any = {};
   private _disabledV: string = '0';
   private disabled: boolean = false;
 
   constructor(private router: Router,
-              private jobTypeService: JobTypeService,
+              private talentService: TalentService,
               private utils: Utils) {
 
   }
@@ -32,7 +29,7 @@ export class HomeComponent {
     this.getJobTypes();
   }
   getJobTypes():void {
-    this.jobTypeService.getJobTypes()
+    this.talentService.getTalents()
       .subscribe(
         jobTypes => this.jobTypes = this.utils.transformJobTypes(jobTypes),
         error => this.errorMessage = <any>error);

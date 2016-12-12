@@ -24,7 +24,7 @@ export class UserService {
    */
   getUsers(): Observable<User[]>{
     var url = this.apiUrl + this.apiEndPoint;
-    var urlMockData = this.mockDataUrl+'talents.json';
+    var urlMockData = this.mockDataUrl+'users.json';
     return this.http.get(urlMockData)
       .map(this.extractData)
       .catch(this.handleError);
@@ -48,7 +48,7 @@ export class UserService {
   getTalentsAvailableByJob() : Observable<User[]>{
     //TODO: fake implementation for Front end purpose only
     var url = this.apiUrl + this.apiEndPoint;
-    var urlMockData = this.mockDataUrl+'talents.json';
+    var urlMockData = this.mockDataUrl+'users.json';
     return this.http.get(urlMockData)
       .map(this.extractData)
       .catch(this.handleError);

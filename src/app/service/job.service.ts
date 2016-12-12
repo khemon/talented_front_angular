@@ -3,14 +3,15 @@
  */
 import {Injectable, Inject} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
-import {JobType} from '../model/job-type';
+import {Job} from '../model/job';
 import {Observable} from 'rxjs/Observable';
 import {AppConfig, APP_CONFIG} from '../app-config';
 import 'rxjs/Rx';
+import {GPSLocation} from "../model/gps-location";
 
 @Injectable()
-export class JobTypeService {
-  private apiEndPoint = 'jobType'
+export class JobService {
+  private apiEndPoint = 'jobRequest';
   private apiUrl;
   private mockDataUrl;
 
@@ -21,13 +22,27 @@ export class JobTypeService {
   }
 
   /**
-   * Retourne la liste des types de jobs de la BDD
+   * Retourne la liste des job request de la BDD
    */
-  getJobTypes(): Observable<JobType[]>{
+  getJobs(): Observable<Job[]>{
     //var url = this.apiUrl + this.apiEndPoint;
     //TODO: remove this url once backend is ready
-    var url = this.mockDataUrl+'job-types.json';
+    var url = this.mockDataUrl+'jobs.json';
     return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  /**
+   * post a new job to server
+   * @param user
+   * @returns {Observable<JobRequest>}
+   */
+  addJob(job: Job): Observable<Job> {
+    let userString = JSON.stringify(job);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.apiUrl + 'job/add', userString, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -35,7 +50,16 @@ export class JobTypeService {
 
   private extractData(res: Response) {
     let body = res.json();
-    return body.data || { };
+    let data = body.data || { };
+    data.forEach((d) => {
+      d.date = new Date(d.date);
+      var gpsLocation = new GPSLocation();
+      gpsLocation.latitude = d.location.x;
+      gpsLocation.longitude = d.location.y;
+      d.location = gpsLocation;
+    });
+    return data;
+
   }
 
   private handleError (error: Response | any) {

@@ -3,7 +3,7 @@
 <section  id="page-title" class="page-title-mini">
 
   <div *ngIf="isUserReady" class="container clearfix">
-    <h1>{{user.name}}</h1>
+    <h1>{{user.firstName}} {{user.lastName}}</h1>
     <ol class="breadcrumb">
       <li><a href="#">Home</a></li>
       <li class="active">Talent</li>
@@ -64,7 +64,7 @@
                             ============================================= -->
             <form class="cart nobottommargin clearfix" method="post" enctype='multipart/form-data'>
 
-              <button type="submit" class="add-to-cart button nomargin">Select this Talent</button>
+              <button type="submit" class="add-to-cart button nomargin">Demander un service</button>
             </form><!-- Product Single - Quantity & Cart Button End -->
 
             <div class="clear"></div>
@@ -73,7 +73,7 @@
             <!-- Product Single - Short Description
                             ============================================= -->
             <ul class="iconlist">
-              <li *ngFor="let jobType of user.jobTypes"><i class="icon-caret-right"></i>{{jobType.name}}</li>
+              <li *ngFor="let t of user.talent"><i class="icon-caret-right"></i>{{t.name}}</li>
             </ul>
 
 
@@ -126,7 +126,7 @@
               <div class="fbox-icon">
                 <i class="icon-thumbs-up2"></i>
               </div>
-              <h3>100% Original</h3>
+              <h3>100% certifié</h3>
               <p class="notopmargin">We guarantee you the sale of Original Brands.</p>
             </div>
 
@@ -134,7 +134,7 @@
               <div class="fbox-icon">
                 <i class="icon-credit-cards"></i>
               </div>
-              <h3>Payment Options</h3>
+              <h3>Options de Paiement</h3>
               <p class="notopmargin">We accept Visa, MasterCard and American Express.</p>
             </div>
 
@@ -151,8 +151,8 @@
                 <li (click)="currentTab=tabs.DESCRIPTION" [ngClass]="{'active': currentTab===tabs.DESCRIPTION}"><a><i class="icon-align-justify2 ui-state-focus ui-state-active"></i><span class="hidden-xs"> Description</span></a>
                 </li>
                 <li (click)="currentTab=tabs.LIST_JOBS" [ngClass]="{'active': currentTab===tabs.LIST_JOBS}"><a><i class="icon-info-sign "></i><span
-                  class="hidden-xs"> Additional Information</span></a></li>
-                <li (click)="currentTab=tabs.REVIEWS" [ngClass]="{'active': currentTab===tabs.REVIEWS}"><a><i class="icon-star3"></i><span class="hidden-xs"> Reviews (2)</span></a></li>
+                  class="hidden-xs"> Services rendus</span></a></li>
+                <li (click)="currentTab=tabs.REVIEWS" [ngClass]="{'active': currentTab===tabs.REVIEWS}"><a><i class="icon-star3"></i><span class="hidden-xs"> Avis (2)</span></a></li>
               </ul>
 
               <div class="tab-container" [ngSwitch]="currentTab">
@@ -274,7 +274,7 @@
                     <!-- Modal Reviews
                                             ============================================= -->
                     <a href="#" data-toggle="modal" data-target="#reviewFormModal"
-                       class="button button-3d nomargin fright">Add a Review</a>
+                       class="button button-3d nomargin fright">Ajouter un avis</a>
 
                     <div class="modal fade" id="reviewFormModal" tabindex="-1" role="dialog"
                          aria-labelledby="reviewFormModalLabel" aria-hidden="true">

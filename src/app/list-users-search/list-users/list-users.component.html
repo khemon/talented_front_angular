@@ -12,7 +12,7 @@
         <span class="price-unit">{{user.hourlyRate}}€/h</span><span class="price-tenure">monthly</span>
       </div>
       <div class="pricing-action">
-        <a [routerLink]="['../talent']" class="button button-3d button-xlarge btn-block nomargin">Choisir</a>
+        <a [routerLink]="['../talent-worker']" class="button button-3d button-xlarge btn-block nomargin">Choisir</a>
       </div>
     </div>
 
@@ -24,10 +24,10 @@
                                  class='avatar avatar-60 photo avatar-default' height='60' width='60'/>
         </span>-->
         <div class="testi-image">
-          <a [routerLink]="['../talent']" [queryParams]="{id: user.id}"><img src="../../assets/images/team/{{user.picture}}.jpg"
+          <a [routerLink]="['../talent-worker']" [queryParams]="{id: user.id}"><img src="../../assets/images/team/{{user.picture}}.jpg"
                            alt="../../assets/images/testimonials/1.jpg"></a>
         </div>
-        <h3><a [routerLink]="['../talent']" [queryParams]="{id: user.id}">{{user.name}}</a></h3>
+        <h3><a [routerLink]="['../talent-worker']" [queryParams]="{id: user.id}">{{user.firstName}} {{user.lastName}}</a></h3>
         <div class="product-rating">
           <i class="icon-star3"></i>
           <i class="icon-star3"></i>
@@ -38,29 +38,15 @@
         </div>
       </div>
       <div class="pricing-features">
-        <!--
-                  <ul class="entry-<a href="#"><li><i class="icon-eye-open"></i>Voir les avis</li></a>
-                <li><span class="label label-warning">Private</span></li>
-                <li><a href="#"><i class="icon-time"></i> 11:00 - 19:00</a></li>
-                <li><a href="#"><i class="icon-map-marker2"></i> Melbourne, Australia</a></li>meta clearfix">
-
-                  </ul>
-                  -->
         <ul class="clearfix">
-          <a href="#">
-            <li><i class="icon-eye-open"></i>Voir les avis</li>
-          </a>
+          <li><a href="#"><i class="icon-eye-open"></i>Voir les avis</a></li>
           <li><span class="label label-warning">Certifié</span></li>
-          <li><a href="#"><i class="icon-time"></i> 11:00 - 19:00</a></li>
-          <li><a href="#"><i class="icon-map-marker2"></i> {{user.address.split(',')[1]}},
-            {{user.address.split(',')[2]}}</a></li>
+          <li><a href="#"><i class="icon-map-marker2"></i>{{user.address.split(',')[1]}}, {{user.address.split(',')[2]}}</a></li>
+          <li><a href="#"><i class="icon-time"></i>11:00 - 19:00</a></li>
         </ul>
         <div class="entry-content">
           <strong>Comment je peux vous aider ?</strong>
-          <p>
-            <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi autem blanditiis enim culpa reiciendis et explicabo tenetur voluptate rerum molestiae eaque possimus exercitationem eligendi fuga.-->
-            {{user.about}}
-          </p>
+          <p>{{user.about}}</p>
         </div>
       </div>
     </div>

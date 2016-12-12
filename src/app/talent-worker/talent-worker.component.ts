@@ -9,15 +9,15 @@ import {UserService} from "../service/user.service";
 import {Subscription} from "rxjs";
 import {TAB_LIST} from './tabs';
 
-console.log('`Register` component loaded asynchronously');
+console.log('`Talent-worker` component loaded asynchronously');
 
 @Component({
-  selector: 'talent',
-  templateUrl: 'talent.component.html',
+  selector: 'talent-worker',
+  templateUrl: 'talent-worker.component.html',
   providers: [UserService]
 
 })
-export class TalentComponent {
+export class TalentWorkerComponent {
   public tabs= TAB_LIST;
   public currentTab: number = TAB_LIST.DESCRIPTION;
   private userId: string;

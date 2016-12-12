@@ -3,14 +3,14 @@
  */
 import {Injectable, Inject} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
-import {JobRequest} from '../model/job-request';
+import {Talent} from '../model/talent';
 import {Observable} from 'rxjs/Observable';
 import {AppConfig, APP_CONFIG} from '../app-config';
 import 'rxjs/Rx';
 
 @Injectable()
-export class JobRequestService {
-  private apiEndPoint = 'jobRequest';
+export class TalentService {
+  private apiEndPoint = 'talent'
   private apiUrl;
   private mockDataUrl;
 
@@ -21,27 +21,13 @@ export class JobRequestService {
   }
 
   /**
-   * Retourne la liste des job request de la BDD
+   * Retourne la liste des types de jobs de la BDD
    */
-  getJobRequests(): Observable<JobRequest[]>{
+  getTalents(): Observable<Talent[]>{
     //var url = this.apiUrl + this.apiEndPoint;
     //TODO: remove this url once backend is ready
-    var url = this.mockDataUrl+'job-request.json';
+    var url = this.mockDataUrl+'talents.json';
     return this.http.get(url)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  /**
-   * post a new job request to server
-   * @param user
-   * @returns {Observable<JobRequest>}
-   */
-  addJobRequest(jobRequest: JobRequest): Observable<JobRequest> {
-    let userString = JSON.stringify(jobRequest);
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-    return this.http.post(this.apiUrl + 'jobRequest/add', userString, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

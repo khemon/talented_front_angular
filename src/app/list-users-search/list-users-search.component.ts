@@ -2,27 +2,27 @@
  * Created by Khémon on 24/11/2016.
  */
 import {Component} from '@angular/core';
-import {JobTypeService} from "../service/job-type.service";
-import {JobType} from "../model/job-type";
+import {TalentService} from "../service/talents.service";
+import {Talent} from "../model/talent";
 
 console.log('`list-users-search` component loaded asynchronously');
 
 @Component({
   selector: 'list-users-search',
   templateUrl: './list-users-search.component.html',
-  providers: [JobTypeService]
+  providers: [TalentService]
 })
 
 export class ListUsersSearchComponent {
   errorMessage: string;
-  jobTypes: Array<JobType>;
+  jobTypes: Array<Talent>;
 
-  constructor(private jobTypeService: JobTypeService) {
+  constructor(private jobTypeService: TalentService) {
   }
 
 
   getJobTypes():void{
-    this.jobTypeService.getJobTypes()
+    this.jobTypeService.getTalents()
       .subscribe(
         jobTypes => this.jobTypes = jobTypes,
         error => this.errorMessage = <any>error);

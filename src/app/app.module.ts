@@ -26,7 +26,6 @@ import { NoContentComponent } from './no-content';
 import {LoginComponent} from "./login";
 import {RegisterComponent} from "./register";
 import {ProfileComponent} from "./profile";
-import {TalentComponent} from "./talent";
 import {ListUsersComponent} from "./list-users-search/list-users";
 import { InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './model/in-memory-data/in-memory-data.service';
@@ -42,6 +41,9 @@ import {UserService} from "./service/user.service";
 import {ListUsersSearchComponent} from "./list-users-search/list-users-search.component";
 import {HeaderComponent} from "./layout/header/header.component";
 import {FooterComponent} from "./layout/footer/footer.component";
+import {ListJobsComponent} from "./list-jobs/list-jobs.component";
+import {TalentWorkerComponent} from "./talent-worker/talent-worker.component";
+import {JobService} from "./service/job.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -71,10 +73,11 @@ type StoreType = {
     HomeComponent,
     NoContentComponent,
     ProfileComponent,
-    TalentComponent,
+    TalentWorkerComponent,
     ListUsersComponent,
     ListUsersSearchComponent,
-    CreateJobComponent
+    CreateJobComponent,
+    ListJobsComponent
 
     /*,XLarge*/
   ],
@@ -95,7 +98,8 @@ type StoreType = {
     ENV_PROVIDERS,
     APP_PROVIDERS,
     {provide: APP_CONFIG, useValue: TALENTED_DI_CONFIG},
-    UserService
+    UserService,
+    JobService
   ]
 })
 

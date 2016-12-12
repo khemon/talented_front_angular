@@ -4,13 +4,13 @@
 import {Subscription, Observable} from 'rxjs';
 import {Component, Injectable, NgZone, ViewChild, ElementRef} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {User} from '../model/user';
 import {NgSwitch, NgSwitchWhen, NgSwitchDefault} from 'angular2/common'
 import {MapsAPILoader} from 'angular2-google-maps/core';
-import {JobRequest} from "../model/job-request";
-import {JobRequestService} from "../service/job-request.service";
+import {Job} from "../model/job";
+import {JobService} from "../service/job.service";
 import {ProcessStep} from "./process-steps";
 import {MapTalentService} from "./google-map/map-talents.service";
+import {GPSLocation} from "../model/gps-location";
 console.log('`create-job` component loaded asynchronously');
 
 declare var google: any;
@@ -20,7 +20,7 @@ declare var google: any;
   selector: 'create-job',
   templateUrl: './create-job.component.html',
   styleUrls: ['./create-job.component.css'],
-  providers: [JobRequestService, MapTalentService]
+  providers: [JobService, MapTalentService]
 })
 
 export class CreateJobComponent {
@@ -30,14 +30,14 @@ export class CreateJobComponent {
   private zoom: number = 15;
   private subscription: Subscription;
   private isNewJob: Boolean = true;
-  private jobRequest: JobRequest;
+  private job: Job;
   private errorMessage: string;
 
   //@ViewChild('autocompleteInput') inputAddress: ElementRef;
   constructor(private route: ActivatedRoute,
               private __loader: MapsAPILoader,
               private __zone: NgZone,
-              private jobRequestService: JobRequestService,
+              private jobService: JobService,
               private mapTalent: MapTalentService) {
   }
 
@@ -64,7 +64,7 @@ export class CreateJobComponent {
         break;
       case ProcessStep.STEP_LIST.NOTIFY_STEP:
         if(!this.isNewJob){ break;}
-        //this.addJobRequest();
+        //this.addJob();
         this.mapTalent.getTalentMarkers();
         break;
       case ProcessStep.STEP_LIST.SELECT_TALEENT_STEP:
@@ -79,19 +79,20 @@ export class CreateJobComponent {
 
     return this.step;
   }
-  addJobRequest() {
-    if (!this.jobRequest) {
+  addJob() {
+    if (!this.job) {
       return;
     }
-    this.jobRequestService.addJobRequest(this.jobRequest)
+    this.jobService.addJob(this.job)
       .subscribe(
-        jobRequest => alert("Job Request créée"),
+        Job => alert("Job Request créée"),
         error =>  console.log(<any>error));
   }
 
 
   ngOnInit() {
     // subscribe to router event
+    this.mapTalent.getTalentMarkers();
     this.subscription = this.route.params.subscribe(
       (param: any) => {
         this.jobType = param['text'];
@@ -99,9 +100,10 @@ export class CreateJobComponent {
       });
 
     //this.autocomplete();
-    this.jobRequest = new JobRequest();
-    this.jobRequest.latitude= 48.866667;
-    this.jobRequest.longitude=2.333333;
+    this.job = new Job();
+    this.job.location = new GPSLocation();
+    this.job.location.latitude= 48.866667;
+    this.job.location.longitude=2.333333;
   }
 
   ngAfterViewInit() {
@@ -120,9 +122,10 @@ export class CreateJobComponent {
         this.__zone.run(() => {
           let place = autocomplete.getPlace();
           if (place.geometry.location) {
-            this.jobRequest.latitude = place.geometry.location.lat();
-            this.jobRequest.longitude = place.geometry.location.lng();
-            this.jobRequest.address = place.formatted_address;
+            this.job.location = new GPSLocation();
+            this.job.location.latitude = place.geometry.location.lat();
+            this.job.location.longitude = place.geometry.location.lng();
+            this.job.address = place.formatted_address;
 
           }
         });

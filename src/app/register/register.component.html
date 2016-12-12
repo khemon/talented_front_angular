@@ -54,13 +54,23 @@
                 (ngSubmit)="onSubmit()" #registerForm="ngForm">
 
             <div class="col_full">
-              <label for="register-form-name">Nom:</label>
-              <input type="text" id="register-form-name" name="register-form-name" class="form-control"
+              <label for="register-form-fname">Prénom:</label>
+              <input type="text" id="register-form-fname" name="register-form-name" class="form-control"
                      required minlength="4" maxlength="24"
-                     [(ngModel)]="user.name" name="name"/>
+                     [(ngModel)]="user.firstName" name="firstName"/>
             </div>
-            <div *ngIf="formErrors.name" class="alert alert-danger">
-              {{formErrors.name}}
+            <div *ngIf="formErrors.firstName" class="alert alert-danger">
+              {{formErrors.firstName}}
+            </div>
+
+            <div class="col_full">
+              <label for="register-form-lname">Nom:</label>
+              <input type="text" id="register-form-lname" name="register-form-name" class="form-control"
+                     required minlength="4" maxlength="24"
+                     [(ngModel)]="user.lastName" name="lastName"/>
+            </div>
+            <div *ngIf="formErrors.lastName" class="alert alert-danger">
+              {{formErrors.lastName}}
             </div>
 
 
@@ -73,6 +83,13 @@
               {{formErrors.email}}
             </div>
 
+
+            <div class="col_full">
+              <label for="register-form-address">Adresse</label>
+              <input type="text" id="register-form-address" name="register-form-phone" value="" class="form-control"
+                     [(ngModel)]="user.address"/>
+            </div>
+
             <div class="col_full">
               <label for="register-form-username">Username</label>
               <input type="text" id="register-form-username" name="register-form-username" value=""
@@ -83,9 +100,12 @@
             </div>
 
             <div class="col_full">
-              <label for="register-form-phone">Telephone:</label>
-              <input type="text" id="register-form-phone" name="register-form-phone" value="" class="form-control"
-                     [(ngModel)]="user.phone"/>
+              <label for="register-form-talents">Jobs your willing to do:</label>
+              <select id="register-form-talents"  (change)="setSelectedTalents($event.target)" multiple>
+                <option *ngFor="let talent of talents" [value]="talent.name" >
+                  {{talent.name}}
+                </option>
+              </select>
             </div>
             <!--
                                     <div class="col_full">

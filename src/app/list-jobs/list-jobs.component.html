@@ -1,0 +1,68 @@
+<!-- Content
+		============================================= -->
+<section id="content">
+
+  <div class="content-wrap">
+
+
+    <div class="container clearfix">
+
+      <sebm-google-map
+        [latitude]="latitude"
+        [longitude]="longitude"
+        [zoom]="zoom"
+        [disableDefaultUI]="false"
+        [zoomControl]="false">
+        <sebm-google-map-marker
+          *ngFor="let m of mapJobService.markerJobs; let i = index"
+          (markerClick)="clickedMarker(m.label, i)"
+          [latitude]="m.lat"
+          [longitude]="m.lng"
+          [label]=""
+          [markerDraggable]="m.draggable"
+        >
+
+          <sebm-google-map-info-window>
+            <strong>{{m.name}}</strong>
+          </sebm-google-map-info-window>
+        </sebm-google-map-marker>
+      </sebm-google-map>
+
+
+      <div class="divider divider-center"><i class="icon-circle-blank"></i></div>
+
+      <h3>Liste des services: {{nbJobs}} trouvés</h3>
+
+      <div id="posts" class="events small-thumbs">
+
+
+        <div *ngFor="let job of jobs; let i = index" class="entry clearfix">
+          <div class="entry-image">
+            <a href="#">
+              <img src="../../assets/images/events/thumbs/{{job.picture}}.jpg" alt="Nemo quaerat nam beatae iusto minima vel">
+              <div class="entry-date">{{job.date | date:"dd"}}<span>{{job.date | date:"MMM"}}</span></div>
+            </a>
+          </div>
+          <div class="entry-c">
+            <div class="entry-title">
+              <h2><a href="#">{{job.talent.name}}</a></h2>
+            </div>
+            <ul class="entry-meta clearfix">
+              <li><span class="label label-info">Public</span></li>
+              <li><a href="#"><i class="icon-time"></i> 11:00 - 19:00</a></li>
+              <li><a href="#"><i class="icon-map-marker2"></i>{{job.address}}</a></li>
+            </ul>
+            <div class="entry-content">
+              <p>{{job.description}}</p>
+              <a href="#" class="btn btn-info">Répondre</a> <a href="#" class="btn btn-danger">Détail</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section><!-- #content end -->
