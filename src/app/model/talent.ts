@@ -5,11 +5,8 @@
 
 
 export class Talent {
-  public id: number;
+  public id: string;
   public name: string;
   public text?: string;
-  constructor(  id: number, name: string) {
-    this.id = id;
-    this.name = name;
-  }
+  constructor() {  }
 }

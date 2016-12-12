@@ -8,6 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {AppConfig, APP_CONFIG} from '../app-config';
 import 'rxjs/Rx';
 import {GPSLocation} from "../model/gps-location";
+import {Talent} from "../model/talent";
 
 @Injectable()
 export class JobService {
@@ -53,10 +54,16 @@ export class JobService {
     let data = body.data || { };
     data.forEach((d) => {
       d.date = new Date(d.date);
+
       var gpsLocation = new GPSLocation();
       gpsLocation.latitude = d.location.x;
       gpsLocation.longitude = d.location.y;
       d.location = gpsLocation;
+
+      var talent = new Talent();
+      talent.id = d.talent.id;
+      talent.name = d.talent.name;
+      d.talent = talent;
     });
     return data;
 
