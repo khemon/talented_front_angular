@@ -1,18 +1,20 @@
 /**
  * Created by Khémon on 21/11/2016.
  */
-import {Injectable, Inject} from '@angular/core';
+import  {Injectable, Inject} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {User} from '../model/user';
 import {Observable} from 'rxjs/Observable';
 import {AppConfig, APP_CONFIG} from '../app-config';
 import 'rxjs/Rx';
+import {DATA_SOURCE} from './data-source';
 
 @Injectable()
 export class UserService {
   private apiEndPoint = 'user';
   private apiUrl;
   private mockDataUrl;
+  private mode = DATA_SOURCE.MOCK_DATA
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http) {
     // Base URL for Talented API
     this.apiUrl = config.apiUrl;
@@ -23,9 +25,15 @@ export class UserService {
    * Retourne la liste des utilisateurs de la BDD
    */
   getUsers(): Observable<User[]>{
-    var url = this.apiUrl + this.apiEndPoint;
-    var urlMockData = this.mockDataUrl+'users.json';
-    return this.http.get(urlMockData)
+    var url;
+    switch(this.mode) {
+      case DATA_SOURCE.BACK_END_API:
+        url = this.apiUrl + this.apiEndPoint;
+        break;
+      default :
+        url = this.mockDataUrl+'users.json';
+    }
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -46,10 +54,15 @@ export class UserService {
    * Signature : getUsersAvailableByJob(Job job);
    */
   getTalentsAvailableByJob() : Observable<User[]>{
-    //TODO: fake implementation for Front end purpose only
-    var url = this.apiUrl + this.apiEndPoint;
-    var urlMockData = this.mockDataUrl+'users.json';
-    return this.http.get(urlMockData)
+    var url;
+    switch(this.mode) {
+      case DATA_SOURCE.BACK_END_API:
+        url = this.apiUrl + this.apiEndPoint;
+        break;
+      default :
+        url = this.mockDataUrl+'users.json';
+    }
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }

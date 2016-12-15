@@ -7,12 +7,14 @@ import {Talent} from '../model/talent';
 import {Observable} from 'rxjs/Observable';
 import {AppConfig, APP_CONFIG} from '../app-config';
 import 'rxjs/Rx';
+import {DATA_SOURCE} from './data-source';
 
 @Injectable()
 export class TalentService {
   private apiEndPoint = 'talent'
   private apiUrl;
   private mockDataUrl;
+  private mode = DATA_SOURCE.MOCK_DATA;
 
   constructor(@Inject(APP_CONFIG) private config: AppConfig, private http: Http) {
     // Base URL for Talented API
@@ -24,9 +26,14 @@ export class TalentService {
    * Retourne la liste des types de jobs de la BDD
    */
   getTalents(): Observable<Talent[]>{
-    //var url = this.apiUrl + this.apiEndPoint;
-    //TODO: remove this url once backend is ready
-    var url = this.mockDataUrl+'talents.json';
+    var url;
+    switch(this.mode) {
+      case DATA_SOURCE.BACK_END_API:
+        url = this.apiUrl + this.apiEndPoint;
+        break;
+      default :
+        url = this.mockDataUrl+'talents.json';
+    }
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

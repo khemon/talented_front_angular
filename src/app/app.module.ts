@@ -44,6 +44,7 @@ import {FooterComponent} from "./layout/footer/footer.component";
 import {ListJobsComponent} from "./list-jobs/list-jobs.component";
 import {TalentWorkerComponent} from "./talent-worker/talent-worker.component";
 import {JobService} from "./service/job.service";
+import {JobComponent} from "./job/job.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -77,7 +78,8 @@ type StoreType = {
     ListUsersComponent,
     ListUsersSearchComponent,
     CreateJobComponent,
-    ListJobsComponent
+    ListJobsComponent,
+    JobComponent
 
     /*,XLarge*/
   ],

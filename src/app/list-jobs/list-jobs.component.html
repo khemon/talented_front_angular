@@ -38,7 +38,7 @@
 
         <div *ngFor="let job of jobs; let i = index" class="entry clearfix">
           <div class="entry-image">
-            <a href="#">
+            <a [routerLink]="['../job']" [queryParams]="{id: job.id}">
               <img src="../../assets/images/events/thumbs/{{job.picture}}.jpg" alt="Nemo quaerat nam beatae iusto minima vel">
               <div class="entry-date">{{job.date | date:"dd"}}<span>{{job.date | date:"MMM"}}</span></div>
             </a>
@@ -54,7 +54,7 @@
             </ul>
             <div class="entry-content">
               <p>{{job.description}}</p>
-              <a href="#" class="btn btn-info">Répondre</a> <a href="#" class="btn btn-danger">Détail</a>
+              <a href="#" class="btn btn-info">Proposer mon aide</a> <a [routerLink]="['../job']" [queryParams]="{id: job.id}" class="btn btn-danger">Détail</a>
             </div>
           </div>
         </div>
