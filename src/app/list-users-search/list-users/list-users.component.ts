@@ -29,7 +29,7 @@ export class ListUsersComponent {
   getUsers(): void {
     this.userService.getUsers()
       .subscribe(
-        users => {this.users = users; alert(this.users[0].firstName);},
+        users => {this.users = users; },
         error => this.errorMessage = <any>error);
 
   }

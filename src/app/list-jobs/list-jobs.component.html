@@ -1,3 +1,18 @@
+<!-- Page Title
+		============================================= -->
+<section id="page-title" class="page-title-mini">
+
+  <div class="container clearfix">
+    <h1>Jobs</h1>
+    <span>Liste des jobs</span>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active">Jobs</li>
+    </ol>
+  </div>
+
+</section><!-- #page-title end -->
+
 <!-- Content
 		============================================= -->
 <section id="content">
@@ -45,7 +60,7 @@
           </div>
           <div class="entry-c">
             <div class="entry-title">
-              <h2><a href="#">{{job.talent.name}}</a></h2>
+              <h2><a [routerLink]="['../job']" [queryParams]="{id: job.id}">{{job.talent.name}}</a></h2>
             </div>
             <ul class="entry-meta clearfix">
               <li><span class="label label-info">Public</span></li>

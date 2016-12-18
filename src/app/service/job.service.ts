@@ -68,7 +68,6 @@ export class JobService {
       gpsLocation.latitude = d.location.x;
       gpsLocation.longitude = d.location.y;
       d.location = gpsLocation;
-
       var talent = new Talent();
       talent.id = d.talent.id;
       talent.name = d.talent.name;
