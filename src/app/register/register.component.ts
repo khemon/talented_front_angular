@@ -80,7 +80,13 @@ export class RegisterComponent {
   };
 
   validationMessages = {
-    'name': {
+    'firstName': {
+      'required': 'Name is required.',
+      'minlength': 'Name must be at least 4 characters long.',
+      'maxlength': 'Name cannot be more than 24 characters long.',
+      'forbiddenName': 'Someone named "Bob" cannot be a hero.'
+    },
+    'lastName': {
       'required': 'Name is required.',
       'minlength': 'Name must be at least 4 characters long.',
       'maxlength': 'Name cannot be more than 24 characters long.',
@@ -97,6 +103,7 @@ export class RegisterComponent {
   ngOnInit(){
     this.user = new User();
     this.getTalents();
+    this.autocomplete();
   }
 
   onSubmit() {

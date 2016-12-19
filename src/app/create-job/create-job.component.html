@@ -96,7 +96,7 @@
               <div class="input-daterange travel-date-group bottommargin-sm">
                 <div class="row">
                   <div class="col-sm-6 bottommargin-sm">
-                    <input type="date" value="2016-12-31" class="sm-form-control tleft today" placeholder="MM/DD/YYYY">
+                    <input type="date" [(ngModel)]="job.date" name="date"  class="sm-form-control tleft today" >
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@
                 <small>*</small>
               </label>
               <textarea [(ngModel)]="job.description" class="required sm-form-control" id="template-contactform-message"
-                        name="template-contactform-message" rows="6" cols="30"></textarea>
+                        name="description" rows="6" cols="30"></textarea>
             </div>
             <div class="divider divider-center"><i class="icon-circle"></i></div>
             <a (click)="changeStep(steps.NOTIFY_STEP)" class="button button-3d nomargin fright tab-linker" rel="3">Etape

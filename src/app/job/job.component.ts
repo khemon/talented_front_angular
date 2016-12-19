@@ -4,11 +4,11 @@
 
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {Subscription, Observable} from "rxjs";
+import {Subscription} from "rxjs";
 import {TAB_LIST} from './tabs';
 import {JobService} from "../service/job.service";
 import {Job} from "../model/job";
-import {timeout} from "rxjs/operator/timeout";
+import {interval} from "rxjs/observable/interval";
 
 console.log('`Job` component loaded asynchronously');
 
@@ -71,7 +71,7 @@ export class JobComponent {
 
 
   countdown() {
-    Observable.interval(1000).map((x) => {
+    interval(1000).map((x) => {
       this.diff = Math.floor((this.job.date.getTime() - new Date().getTime()) / 1000);
     }).subscribe((x) => {
       this.days = this.getDays(this.diff);

@@ -100,9 +100,9 @@
             </div>
 
             <div class="col_full">
-              <label for="register-form-talents">Jobs your willing to do:</label>
+              <label for="register-form-talents">Les services que vous voulez rendre</label>
               <select id="register-form-talents"  (change)="setSelectedTalents($event.target)" multiple>
-                <option *ngFor="let talent of talents" [value]="talent.name" >
+                <option *ngFor="let talent of talents" [value]="talent.name" [(ngModel)]="user.talent" name="talent">
                   {{talent.name}}
                 </option>
               </select>

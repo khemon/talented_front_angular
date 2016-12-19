@@ -4,7 +4,6 @@
 import {Subscription, Observable} from 'rxjs';
 import {Component, Injectable, NgZone, ViewChild, ElementRef} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {NgSwitch, NgSwitchWhen, NgSwitchDefault} from 'angular2/common'
 import {MapsAPILoader} from 'angular2-google-maps/core';
 import {Job} from "../model/job";
 import {JobService} from "../service/job.service";
@@ -64,7 +63,8 @@ export class CreateJobComponent {
         break;
       case ProcessStep.STEP_LIST.NOTIFY_STEP:
         if(!this.isNewJob){ break;}
-        //this.addJob();
+        alert(this.job.description)
+        this.addJob();
         this.mapTalent.getTalentMarkers();
         break;
       case ProcessStep.STEP_LIST.SELECT_TALEENT_STEP:
@@ -85,7 +85,7 @@ export class CreateJobComponent {
     }
     this.jobService.addJob(this.job)
       .subscribe(
-        Job => alert("Job Request créée"),
+        Job => alert("Job Request créé"),
         error =>  console.log(<any>error));
   }
 
@@ -99,8 +99,8 @@ export class CreateJobComponent {
         console.log(this.jobType);
       });
 
-    //this.autocomplete();
     this.job = new Job();
+    this.job.date = new Date();
     this.job.location = new GPSLocation();
     this.job.location.latitude= 48.866667;
     this.job.location.longitude=2.333333;

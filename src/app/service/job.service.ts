@@ -52,6 +52,7 @@ export class JobService {
     let userString = JSON.stringify(job);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
+    alert(userString);
     return this.http.post(this.apiUrl + 'job/add', userString, options)
       .map(this.extractData)
       .catch(this.handleError);
